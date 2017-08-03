@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Exo_app</string>
+    <string name="player_activity_name">Media Player</string>
+    <string name="media_url">http://www.semanticdevlab.com/abc.mp4</string>
+</resources>
