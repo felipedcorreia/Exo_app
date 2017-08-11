@@ -21,6 +21,9 @@ public class Activity_Login extends AppCompatActivity {
     Button btnLogin;
     TextView txtRegister, txtRegisterLink;
 
+    private static final String TAG_EMAIL = "email";
+    private static final String TAG_PASSWORD = "password";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
