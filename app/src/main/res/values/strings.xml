@@ -2,4 +2,39 @@
     <string name="app_name">Exo_app</string>
     <string name="player_activity_name">Media Player</string>
     <string name="media_url">http://www.semanticdevlab.com/abc.mp4</string>
+
+    <string name="lbl_Name">Nome</string>
+    <string name="lbl_CPF">CPF</string>
+    <string name="lbl_Phone">Telefone</string>
+    <string name="lbl_Email">Email</string>
+    <string name="lbl_Adress">Endereço</string>
+    <string name="lbl_Birth">Data de Nascimento</string>
+    <string name="lbl_Password">Senha</string>
+    <string name="lbl_Confirm_Password">Confirme sua Senha</string>
+    <string name="lbl_Plan">Escolha seu plano</string>
+    <string name="lbl_Church">Igreja</string>
+
+    <string name="txt_adress_number">Numero</string>
+    <string name="txt_adress_complement">Complemento</string>
+    <string name="txt_adress_street">Rua</string>
+    <string name="txt_adress_Neighborhood">Bairro</string>
+    <string name="txt_adress_City">Cidade</string>
+    <string name="txt_create_acc"><u>Crie uma</u></string>
+
+    <string name="message_error_empty_name">Por favor, preencha o campo Nome</string>
+    <string name="message_error_empty_cpf">Por favor, preencha o campo CPF</string>
+    <string name="message_error_empty_birth">Por favor, preencha o campo Data de nascimento</string>
+    <string name="message_error_empty_ddd">Por favor, preencha o campo DDD</string>
+    <string name="message_error_empty_phone">Por favor, preencha o campo Telefone</string>
+    <string name="message_error_empty_email">Por favor, preencha o campo Email</string>
+    <string name="message_error_empty_adressStreet">Por favor, preencha o campo Rua</string>
+    <string name="message_error_empty_adressNumber">Por favor, preencha o campo Número</string>
+    <string name="message_error_empty_adressComplement">Por favor, preencha o campo Complemento, ou deixe-o vazio</string>
+    <string name="message_error_empty_adressNeighborhood">Por favor, preencha o campo Bairro</string>
+    <string name="message_error_empty_adressCity">Por favor, preencha o campo Cidade</string>
+    <string name="message_error_empty_state">Por favor, selecione o estado</string>
+
+
+
+
 </resources>
