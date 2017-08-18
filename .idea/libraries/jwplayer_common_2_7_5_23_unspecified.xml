@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="jwplayer-common-2.7.5+23-unspecified">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.android/build-cache/9af5c6b1d5040c61d0aa609021afbebce2ae2f5a/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/9af5c6b1d5040c61d0aa609021afbebce2ae2f5a/output/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

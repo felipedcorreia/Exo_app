@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="correia.felipe.exo_app">
-    
-    <uses-permission android:name="android.permission.INTERNET" ></uses-permission>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -18,9 +18,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Activity_register"></activity>
         <activity
-            android:name=".Activity_register">
-        </activity>
+            android:name=".JWplayer"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
+
+        <meta-data
+            android:name="JW_LICENSE_KEY"
+            android:value="SvU3mhaLGcO7eiqq/+IgvqH2EraMgSNPLwpo5A==" />
+
+        <activity
+            android:name=".PrincipalActivity"
+            android:label="@string/title_activity_principal"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

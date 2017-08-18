@@ -272,7 +272,7 @@ public class Activity_register extends AppCompatActivity {
     private void callserver(final String data) {
         new Thread() {
             public void run() {
-                String answer = HttpConnection.getSetDataWeb("https://1d8cbbe1.ngrok.io/api/json", data);
+                String answer = HttpConnection.getSetDataWeb("http://8ecfbaac.ngrok.io/api/json", data);
                 Log.i("Script", "ANSWER" + answer);
             }
         }.start();

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.longtailvideo.jwplayer.JWPlayerFragment"
+        android:id="@+id/playerFragment"
+        tools:layout="@layout/jw_player_fragment_sample_layout"/>
+    <com.longtailvideo.jwplayer.JWPlayerView
+        xmlns:jwp="http://schemas.android.com/apk/lib/com.longtailvideo.jwplayer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/playerView"
+        jwp:jw_autostart="true"/>
+
+
+</FrameLayout>

@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="ccl-2.9.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.android/build-cache/0242962e07f98d4b27237f3b0313021a32f9c80b/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/0242962e07f98d4b27237f3b0313021a32f9c80b/output/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.libraries.cast.companionlibrary/ccl/2.9.1/137c312763230aa92099f386f64e4d8ddc525f2e/ccl-2.9.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

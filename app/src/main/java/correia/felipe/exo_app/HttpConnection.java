@@ -1,6 +1,7 @@
 package correia.felipe.exo_app;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.exoplayer2.C;
 import com.google.gson.Gson;
@@ -35,64 +36,72 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class HttpConnection {
-    public static String getSetDataWeb(String url, String data){
+    public static String getSetDataWeb(String url, String data) {
 
         HttpClient httpClient = new DefaultHttpClient();
         HttpPost httpPost = new HttpPost(url);
         String answer = "";
 
-        try{
-           // ArrayList<String> valores = new ArrayList<String>();
+
+        try {
+            // ArrayList<String> valores = new ArrayList<String>();
             //valores.add(new BasicNameValuePair("method", method));
             //valores.add(data);
             //valores.add(new BasicNameValuePair("json", data));
 
 
             httpPost.setHeader("Accept", "application/json");
-            httpPost.setHeader("Content-type","application/json");
+            httpPost.setHeader("Content-type", "application/json");
             StringEntity postString = new StringEntity(data, "UTF-8");
             httpPost.setEntity(postString);
 
-           // httpPost.setEntity(new UrlEncodedFormEntity(valores));
+            // httpPost.setEntity(new UrlEncodedFormEntity(valores));
             HttpResponse resposta = httpClient.execute(httpPost);
+            int statusCode = resposta.getStatusLine().getStatusCode();
             answer = EntityUtils.toString(resposta.getEntity());
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        catch(NullPointerException e){ e.printStackTrace(); }
-        catch(ClientProtocolException e){ e.printStackTrace(); }
-        catch(IOException e){ e.printStackTrace(); }
 
-        return(answer);
+        return (answer);
     }
 
+    public static int getStatusCode(String url, String data) {
+
+        HttpClient httpClient = new DefaultHttpClient();
+        HttpPost httpPost = new HttpPost(url);
+        int statusCode = 0;
+        String answer = "";
 
 
-    //Solução 1
-   /* private void getJson(final String url) {
-        new Thread(new Runnable() {
+        try {
+            // ArrayList<String> valores = new ArrayList<String>();
+            //valores.add(new BasicNameValuePair("method", method));
+            //valores.add(data);
+            //valores.add(new BasicNameValuePair("json", data));
 
-            @Override
-            public void run() {
-                Object retorno = null;
-                try {
 
-                    HttpClient httpclient = new DefaultHttpClient();
-                    HttpGet request = new HttpGet();
+            httpPost.setHeader("Accept", "application/json");
+            httpPost.setHeader("Content-type", "application/json");
+            StringEntity postString = new StringEntity(data, "UTF-8");
+            httpPost.setEntity(postString);
 
-                    request.setURI(new URI(url));
+            // httpPost.setEntity(new UrlEncodedFormEntity(valores));
+            HttpResponse resposta = httpClient.execute(httpPost);
+            statusCode = resposta.getStatusLine().getStatusCode();
+            answer = EntityUtils.toString(resposta.getEntity());
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-                    HttpResponse response = httpclient.execute(request);
-                    InputStream content = response.getEntity().getContent();
-
-                    Reader reader = new InputStreamReader(content);
-                    Gson gson = new Gson();
-                    retorno = gson.fromJson(reader, HashMap.class);
-                    content.close();
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
+        return (statusCode);
     }
-    */
 }
