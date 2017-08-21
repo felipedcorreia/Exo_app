@@ -3,29 +3,16 @@ package correia.felipe.exo_app;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.util.Linkify;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 /**
  * Created by Felipe on 04/08/2017.
@@ -92,7 +79,7 @@ public class Activity_Login extends AppCompatActivity {
                 }.start();
                //Toast.makeText(getApplicationContext(),answer , Toast.LENGTH_LONG).show();
                 Log.d("Script", "ANSWER" + answer);
-                Intent login = new Intent(Activity_Login.this, PrincipalActivity.class);
+                Intent login = new Intent(Activity_Login.this, Activity_Principal.class);
                 startActivity(login);
                 /*if(){
                     Intent login = new Intent();

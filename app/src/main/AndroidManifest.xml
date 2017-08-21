@@ -28,9 +28,10 @@
             android:value="SvU3mhaLGcO7eiqq/+IgvqH2EraMgSNPLwpo5A==" />
 
         <activity
-            android:name=".PrincipalActivity"
+            android:name=".Activity_menu_principal"
             android:label="@string/title_activity_principal"
             android:theme="@style/AppTheme"></activity>
+        <activity android:name=".Activity_Principal" />
     </application>
 
 </manifest>

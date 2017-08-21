@@ -1,35 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
-    >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/video_thumbnail"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="20dp"
-        />
+    <RelativeLayout
+        android:layout_width="105dp"
+        android:layout_height="154dp"
+        android:gravity="center">
 
-    <TextView android:id="@+id/video_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/video_thumbnail"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="5dp"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        />
+        <ImageView
+            android:id="@+id/button"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/relativeLayout"
+            android:src="@drawable/ic_video" />
 
-    <TextView android:id="@+id/video_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/video_thumbnail"
-        android:layout_below="@+id/video_title"
-        android:textSize="15sp"
-        />
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="129dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/button"
+            android:background="#80666666">
 
-</RelativeLayout>
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="hello"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

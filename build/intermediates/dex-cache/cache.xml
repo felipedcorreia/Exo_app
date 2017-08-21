@@ -7,7 +7,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.3"
-        sha1="05cb3606b4f7ebc4bae74b4fae05813775109254">
+        sha1="5c25668f6ab0ef3790986b336200d0c109528f4c">
         <dex dex="C:\Users\Felipe\Desktop\AndroidStreaming\Exo_app\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_2e6a5972af2a9dc28510aa015f4549cca7564124\classes.dex" />
     </item>
     <item
@@ -63,6 +63,15 @@
         revision="25.0.3"
         sha1="ee5304fd374e0b4ebf6b42d4037fbfb2c5336511">
         <dex dex="C:\Users\Felipe\Desktop\AndroidStreaming\Exo_app\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_46119b11b89670394308dc4e92e8c5d744fd123b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Felipe\.android\build-cache\b7fe26185444b4a0a090cae9781d74b366e308c4\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="555d27ee3451fd34f0de714c39ac240da0d27d7f">
+        <dex dex="C:\Users\Felipe\Desktop\AndroidStreaming\Exo_app\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_ff4fd57e57b004d736a9866f35420e460ed67c13\classes.dex" />
     </item>
     <item
         is-multidex="true"
