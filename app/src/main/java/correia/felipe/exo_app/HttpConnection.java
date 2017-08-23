@@ -1,5 +1,6 @@
 package correia.felipe.exo_app;
 
+import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ import java.util.HashMap;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -104,4 +106,6 @@ public class HttpConnection {
 
         return (statusCode);
     }
+
+
 }

@@ -24,7 +24,7 @@
             android:background="#80666666">
 
             <TextView
-                android:id="@+id/text"
+                android:id="@+id/text_video"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
