@@ -40,6 +40,7 @@ import org.json.JSONObject;
 public class HttpConnection {
     public static String getSetDataWeb(String url, String data) {
 
+        Integer result = 0;
         HttpClient httpClient = new DefaultHttpClient();
         HttpPost httpPost = new HttpPost(url);
         String answer = "";
@@ -60,7 +61,17 @@ public class HttpConnection {
             // httpPost.setEntity(new UrlEncodedFormEntity(valores));
             HttpResponse resposta = httpClient.execute(httpPost);
             int statusCode = resposta.getStatusLine().getStatusCode();
-            answer = EntityUtils.toString(resposta.getEntity());
+
+            // 200 represents HTTP OK
+            if (statusCode == 200) {
+                //String response = streamToString(resposta.getEntity().getContent());
+                answer = EntityUtils.toString(resposta.getEntity());
+                //parseResult(response);
+                result = 1; // Successful
+            } else {
+                result = 0; //"Failed
+            }
+
         } catch (NullPointerException e) {
             e.printStackTrace();
         } catch (ClientProtocolException e) {
@@ -71,6 +82,23 @@ public class HttpConnection {
 
         return (answer);
     }
+
+    static String streamToString(InputStream stream) throws IOException {
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(stream));
+        String line;
+        String result = "";
+        while ((line = bufferedReader.readLine()) != null) {
+            result += line;
+        }
+
+        // Close stream
+        if (null != stream) {
+            stream.close();
+        }
+        return result;
+    }
+
+    /*
 
     public static int getStatusCode(String url, String data) {
 
@@ -106,6 +134,7 @@ public class HttpConnection {
 
         return (statusCode);
     }
+    */
 
 
 }

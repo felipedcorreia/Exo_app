@@ -47,18 +47,6 @@ public class Activity_Login extends AppCompatActivity {
         txtRegister = (TextView) findViewById(R.id.txt_register);
         txtRegisterLink = (TextView) findViewById(R.id.txt_register_link);
 
-        btnJson = (Button) findViewById(R.id.btnJson);
-        txtjson = (TextView) findViewById(R.id.txtJson);
-
-
-        btnJson.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //new JsonTask().execute("https://jsonip.com/");
-                //new JsonTask().execute("http://45457db6.ngrok.io/api/json");
-            }
-        });
-
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,14 +58,14 @@ public class Activity_Login extends AppCompatActivity {
                 //Log.d("Json","request");
                 new Thread() {
                     public void run() {
-                        //String answer = HttpConnection.getSetDataWeb("http://8ecfbaac.ngrok.io/api/login", data);
+                        HttpConnection.getSetDataWeb("http://8ecfbaac.ngrok.io/api/login", json);
                         //Log.i("Script", "ANSWER" + answer);
-                        int answer = HttpConnection.getStatusCode("http://8ecfbaac.ngrok.io/api/login", json);
+                        //int answer = HttpConnection.getStatusCode("http://8ecfbaac.ngrok.io/api/login", json);
 
 
                     }
                 }.start();
-               //Toast.makeText(getApplicationContext(),answer , Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(),answer , Toast.LENGTH_LONG).show();
                 Log.d("Script", "ANSWER" + answer);
                 Intent login = new Intent(Activity_Login.this, Activity_Principal.class);
                 startActivity(login);
@@ -85,7 +73,6 @@ public class Activity_Login extends AppCompatActivity {
                     Intent login = new Intent();
                     startActivity(login);
                 }*/
-
 
 
             }
@@ -96,8 +83,8 @@ public class Activity_Login extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                    Intent register = new Intent(Activity_Login.this, Activity_register.class);
-                    startActivity(register);
+                Intent register = new Intent(Activity_Login.this, Activity_register.class);
+                startActivity(register);
 
             }
         });
@@ -107,8 +94,9 @@ public class Activity_Login extends AppCompatActivity {
         JSONArray jArray = new JSONArray();
         JSONObject jObj = new JSONObject();
 
-        try {jObj.put("email", email.getText().toString());
-             jObj.put("password", password.getText().toString());
+        try {
+            jObj.put("email", email.getText().toString());
+            jObj.put("password", password.getText().toString());
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -119,13 +107,14 @@ public class Activity_Login extends AppCompatActivity {
     }
 
     public int answer;
+
     @SuppressLint("NewApi")
     private void callserver(final String data) {
         new Thread() {
             public void run() {
-                //String answer = HttpConnection.getSetDataWeb("http://8ecfbaac.ngrok.io/api/login", data);
+                String answer = HttpConnection.getSetDataWeb("http://8ecfbaac.ngrok.io/api/login", data);
                 //Log.i("Script", "ANSWER" + answer);
-                int answer = HttpConnection.getStatusCode("http://8ecfbaac.ngrok.io/api/login", data);
+                //    int answer = HttpConnection.getStatusCode("http://8ecfbaac.ngrok.io/api/login", data);
                 Log.d("Script", "ANSWER" + answer);
 
             }
@@ -134,19 +123,7 @@ public class Activity_Login extends AppCompatActivity {
 
     }
 
-    /*public int getStatusCode(String urlPath) {
-        try {
-            URL url = new URL(urlPath);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-            conn.connect();
-            Toast.makeText(getApplicationContext(), conn.getResponseCode(),
-                    Toast.LENGTH_LONG).show();
-            return conn.getResponseCode();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }*/
-    }
+}
 
 
 
@@ -161,73 +138,3 @@ public class Activity_Login extends AppCompatActivity {
 
 
 
-
-
-
-/*    private class JsonTask extends AsyncTask<String, String, String> {
-
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-            pd = new ProgressDialog(Activity_Login.this);
-            pd.setMessage("Please wait");
-            pd.setCancelable(false);
-            pd.show();
-        }
-
-        protected String doInBackground(String... params) {
-
-
-            HttpURLConnection connection = null;
-            BufferedReader reader = null;
-
-            try {
-                URL url = new URL(params[0]);
-                connection = (HttpURLConnection) url.openConnection();
-                connection.connect();
-
-
-                InputStream stream = connection.getInputStream();
-
-                reader = new BufferedReader(new InputStreamReader(stream));
-
-                StringBuffer buffer = new StringBuffer();
-                String line = "";
-
-                while ((line = reader.readLine()) != null) {
-                    buffer.append(line+"\n");
-                    Log.d("Response: ", "> " + line);   //here u ll get whole response...... :-)
-
-                }
-
-                return buffer.toString();
-
-
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if (connection != null) {
-                    connection.disconnect();
-                }
-                try {
-                    if (reader != null) {
-                        reader.close();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            if (pd.isShowing()){
-                pd.dismiss();
-            }
-            txtjson.setText(result);
-        }
-    }*/

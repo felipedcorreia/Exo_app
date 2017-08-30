@@ -1,10 +1,13 @@
 package correia.felipe.exo_app;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -14,6 +17,7 @@ import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -21,91 +25,56 @@ import java.util.ArrayList;
  * Created by Felipe on 23/08/2017.
  */
 
-public class GridViewAdapter extends RecyclerView.Adapter<GridViewAdapter.SimpleViewHolder> {
+public class GridViewAdapter extends ArrayAdapter<VideoItem> {
 
-    //Imageloader to load images
-    private ImageLoader imageLoader;
+    //private final ColorMatrixColorFilter grayscaleFilter;
+    private Context mContext;
+    private int layoutResourceId;
+    private ArrayList<VideoItem> mGridData = new ArrayList<VideoItem>();
 
-    //Context
-    private Context context;
+    public GridViewAdapter(Context mContext, int layoutResourceId, ArrayList<VideoItem> mGridData) {
+        super(mContext, layoutResourceId, mGridData);
+        this.layoutResourceId = layoutResourceId;
+        this.mContext = mContext;
+        this.mGridData = mGridData;
+    }
 
-    //Array List that would contain the urls and the titles for the images
-    private ArrayList<String> images;
-    private ArrayList<String> title;
-    private ArrayList<String> description;
-    private ArrayList<String> duration;
-    private ArrayList<String> year;
-    private ArrayList<String> serie;
 
-    public GridViewAdapter (Context context, ArrayList<String> images, ArrayList<String> title){
-        //Getting all the values
-        this.context = context;
-        this.images = images;
-        this.title = title;
+    /**
+     * Updates grid data and refresh grid items.
+     *
+     * @param mGridData
+     */
+    public void setGridData(ArrayList<VideoItem> mGridData) {
+        this.mGridData = mGridData;
+        notifyDataSetChanged();
     }
 
     @Override
-    public SimpleViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        final View view = LayoutInflater.from(this.context).inflate(R.layout.video_item, parent, false);
-        return new SimpleViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(SimpleViewHolder holder, final int position) {
-        //holder.button.setText(elements.get(position));
-        holder.button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(context, "Position =" + position, Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    @Override
-    public int getItemCount() {
-        return this.images.size();
-    }
-
-    public static class SimpleViewHolder extends RecyclerView.ViewHolder {
-        public final ImageView button;
-
-        public SimpleViewHolder(View view) {
-            super(view);
-            button = (ImageView) view.findViewById(R.id.button);
-        }
-    }
-
-
-
     public View getView(int position, View convertView, ViewGroup parent) {
-        //Creating a linear layout
-        LinearLayout linearLayout = new LinearLayout(context);
-        linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+        View row = convertView;
+        ViewHolder holder;
 
-        //NetworkImageView
-        NetworkImageView networkImageView = new NetworkImageView(context);
+        if (row == null) {
+            LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
+            row = inflater.inflate(layoutResourceId, parent, false);
+            holder = new ViewHolder();
+            holder.titleTextView = (TextView) row.findViewById(R.id.video_item_title);
+            holder.imageView = (ImageView) row.findViewById(R.id.video_item_image);
+            row.setTag(holder);
+        } else {
+            holder = (ViewHolder) row.getTag();
+        }
 
-        //Initializing ImageLoader
-        imageLoader = CustomVolleyRequest.getInstance(context).getImageLoader();
-        imageLoader.get(images.get(position), ImageLoader.getImageListener(networkImageView, R.mipmap.ic_launcher, android.R.drawable.ic_dialog_alert));
+        VideoItem item = mGridData.get(position);
+        holder.titleTextView.setText(Html.fromHtml(item.getTitle()));
 
-        //Setting the image url to load
-        networkImageView.setImageUrl(images.get(position),imageLoader);
+        Picasso.with(mContext).load(item.getImage()).into(holder.imageView);
+        return row;
+    }
 
-        //Creating a textview to show the title
-        TextView textView = new TextView(context);
-        textView.setText(title.get(position));
-
-        //Scaling the imageview
-        networkImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        networkImageView.setLayoutParams(new GridView.LayoutParams(200,200));
-
-        //Adding views to the layout
-        linearLayout.addView(textView);
-        linearLayout.addView(networkImageView);
-
-
-        //Returnint the layout
-        return linearLayout;
+    static class ViewHolder {
+        TextView titleTextView;
+        ImageView imageView;
     }
 }

@@ -19,18 +19,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity_register"></activity>
-        <activity
-            android:name=".JWplayer"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" />
 
         <meta-data
             android:name="JW_LICENSE_KEY"
             android:value="SvU3mhaLGcO7eiqq/+IgvqH2EraMgSNPLwpo5A==" />
 
-        <activity
-            android:name=".Activity_menu_principal"
-            android:label="@string/title_activity_principal"
-            android:theme="@style/AppTheme"></activity>
         <activity android:name=".Activity_Principal" />
     </application>
 

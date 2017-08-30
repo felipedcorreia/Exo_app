@@ -131,6 +131,7 @@
     <orderEntry type="library" exported="" name="support-vector-drawable-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="support-compat-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="jwplayer-chromecast-2.7.5+23" level="project" />
+    <orderEntry type="library" exported="" name="picasso-2.5.2" level="project" />
     <orderEntry type="library" exported="" name="gson-2.6.2" level="project" />
     <orderEntry type="library" exported="" name="jwplayer-ima-2.7.5+23" level="project" />
     <orderEntry type="library" exported="" name="constraint-layout-1.0.2" level="project" />
