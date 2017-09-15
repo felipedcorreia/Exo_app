@@ -14,6 +14,8 @@
     <string name="lbl_Plan">Escolha seu plano</string>
     <string name="lbl_Church">Igreja</string>
 
+    <string name="lbl_Lancamento">Lançamento</string>
+
     <string name="txt_adress_number">Numero</string>
     <string name="txt_adress_complement">Complemento</string>
     <string name="txt_adress_street">Rua</string>

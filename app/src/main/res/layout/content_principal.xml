@@ -1,29 +1,223 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#f0f0f0">
 
-        <GridView
-            android:id="@+id/gridView"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:columnWidth="100dp"
-            android:drawSelectorOnTop="true"
-            android:gravity="center"
-            android:numColumns="auto_fit"
-            android:stretchMode="columnWidth"
-            android:verticalSpacing="5dp"
-            android:focusable="true"
-            android:clickable="true"/>
+    <FrameLayout
+        android:id="@+id/layout_propaganda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#f0f0f0"
+        android:layout_toEndOf="@+id/progressBar"
+        android:layout_marginStart="6dp">
 
-        <ProgressBar
+        <ImageView
+            android:id="@+id/thumb_principal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_video_default" />
+
+
+    </FrameLayout>
+
+        <TextView
+            android:id="@+id/textView_Lancamento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lbl_Lancamento"
+            android:layout_below="@+id/layout_propaganda"
+            android:textAppearance="@android:style/TextAppearance.Medium" />
+
+        <HorizontalScrollView
+            android:id="@+id/layout_Lancamento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView_Lancamento"
+            android:layout_marginTop="15dp">
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/layout_conteudo"
+                    android:layout_width="1100dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:layout_toEndOf="@+id/progressBar"
+                    android:weightSum="1">
+
+                    <GridView
+                        android:id="@+id/gridView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="65dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:clickable="true"
+                        android:columnWidth="100dp"
+                        android:drawSelectorOnTop="true"
+                        android:gravity="center"
+                        android:numColumns="auto_fit"
+                        android:verticalSpacing="5dp"
+                        android:layout_weight="15.14" />
+                </LinearLayout>
+            </FrameLayout>
+        </HorizontalScrollView>
+
+        <TextView
+            android:id="@+id/textView_Key1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lbl_Lancamento"
+            android:layout_below="@+id/layout_Lancamento"
+            android:textAppearance="@android:style/TextAppearance.Medium" />
+
+    <HorizontalScrollView
+        android:id="@+id/layout_Key_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView_Key1"
+        android:layout_marginTop="15dp">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/linearLayout_gridtableLayout"
+                android:layout_width="900dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <GridView
+                    android:id="@+id/gridView_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="65dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:clickable="true"
+                    android:columnWidth="100dp"
+                    android:drawSelectorOnTop="true"
+                    android:gravity="center"
+                    android:numColumns="auto_fit"
+                    android:verticalSpacing="5dp" />
+
+            </LinearLayout>
+        </FrameLayout>
+    </HorizontalScrollView>
+        <TextView
+            android:id="@+id/textView_Key2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lbl_Lancamento"
+            android:layout_below="@+id/layout_Key_1"
+            android:textAppearance="@android:style/TextAppearance.Medium" />
+
+    <HorizontalScrollView
+        android:id="@+id/layout_Key_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView_Key2"
+        android:layout_marginTop="15dp">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/linearLayout_gridtableLayout"
+                android:layout_width="900dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <GridView
+                    android:id="@+id/gridView_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="65dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:clickable="true"
+                    android:columnWidth="100dp"
+                    android:drawSelectorOnTop="true"
+                    android:gravity="center"
+                    android:numColumns="auto_fit"
+                    android:verticalSpacing="5dp" />
+
+            </LinearLayout>
+        </FrameLayout>
+    </HorizontalScrollView>
+
+        <TextView
+            android:id="@+id/textView_Key3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lbl_Lancamento"
+            android:layout_below="@+id/layout_Key_2"
+            android:textAppearance="@android:style/TextAppearance.Medium" />
+
+    <HorizontalScrollView
+        android:id="@+id/layout_Key_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/layout_Key_2"
+        android:layout_marginTop="15dp">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/linearLayout_gridtableLayout"
+                android:layout_width="900dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <GridView
+                    android:id="@+id/gridView_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="65dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:clickable="true"
+                    android:columnWidth="100dp"
+                    android:drawSelectorOnTop="true"
+                    android:gravity="center"
+                    android:numColumns="auto_fit"
+                    android:verticalSpacing="5dp" />
+
+            </LinearLayout>
+        </FrameLayout>
+    </HorizontalScrollView>
+
+    <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/progressBar"
             android:layout_centerInParent="true"
             android:visibility="gone"/>
-    </RelativeLayout>
+
+
+</RelativeLayout>
+</ScrollView>
+

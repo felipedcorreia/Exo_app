@@ -3,11 +3,20 @@
 
     <item
         is-multidex="true"
+        jar="C:\Users\Felipe\Desktop\AndroidStreaming\Exo_app\app\libs\android-smart-image-view-1.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="d76ea8c3e9a60101244d6d04aff8cc75888570f0">
+        <dex dex="C:\Users\Felipe\Desktop\AndroidStreaming\Exo_app\app\build\intermediates\transforms\dex\debug\folders\1000\2\android-smart-image-view-1.0.0_873050fae61ed1d693f6dfc168bee992c5a44bc9\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="C:\Users\Felipe\Desktop\AndroidStreaming\Exo_app\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.3"
-        sha1="d9d817cad3004052c9e359b3c20c92f054009d10">
+        sha1="7a744007d0a54ccb75cb39478c5d05c2112d6ba6">
         <dex dex="C:\Users\Felipe\Desktop\AndroidStreaming\Exo_app\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_2e6a5972af2a9dc28510aa015f4549cca7564124\classes.dex" />
     </item>
     <item

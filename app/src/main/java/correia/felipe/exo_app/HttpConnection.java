@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.exoplayer2.C;
+import com.google.android.gms.ads.internal.request.StringParcel;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -39,13 +40,10 @@ import org.json.JSONObject;
 
 public class HttpConnection {
     public static String getSetDataWeb(String url, String data) {
-
         Integer result = 0;
         HttpClient httpClient = new DefaultHttpClient();
         HttpPost httpPost = new HttpPost(url);
-        String answer = "";
-
-
+        String answer = null;
         try {
             // ArrayList<String> valores = new ArrayList<String>();
             //valores.add(new BasicNameValuePair("method", method));
@@ -67,9 +65,26 @@ public class HttpConnection {
                 //String response = streamToString(resposta.getEntity().getContent());
                 answer = EntityUtils.toString(resposta.getEntity());
                 //parseResult(response);
-                result = 1; // Successful
-            } else {
-                result = 0; //"Failed
+                result = 200; // Successful
+                //return (answer);
+                // 201 represents HTTP OK
+            } else if(statusCode == 201){
+
+                //String response = streamToString(resposta.getEntity().getContent());
+                answer = EntityUtils.toString(resposta.getEntity());
+                //parseResult(response);
+                result = 200; // Successful
+                //return (answer);
+                // 400 represents HTTP solicitação invalida
+            } else if(statusCode == 400){
+
+                //String response = streamToString(resposta.getEntity().getContent());
+                answer = EntityUtils.toString(resposta.getEntity());
+                //parseResult(response);
+                result = 400; // FAIL
+            } else{
+                answer = String.valueOf(statusCode);
+                // Failed
             }
 
         } catch (NullPointerException e) {
@@ -80,7 +95,15 @@ public class HttpConnection {
             e.printStackTrace();
         }
 
-        return (answer);
+        return answer;
+    }
+
+
+
+    public static String getTitle(String url) {
+        String title= "";
+
+        return title;
     }
 
     static String streamToString(InputStream stream) throws IOException {

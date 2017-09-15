@@ -1,6 +1,7 @@
 package correia.felipe.exo_app;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -34,18 +35,18 @@ import java.util.List;
 
 
   public class VideoItem{
-        private String image;
+        private Bitmap image;
         private String title;
 
         public VideoItem() {
             super();
         }
 
-        public String getImage() {
+        public Bitmap getImage() {
             return image;
         }
 
-        public void setImage(String image) {
+        public void setImage(Bitmap image) {
             this.image = image;
         }
 

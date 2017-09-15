@@ -2,6 +2,8 @@ package correia.felipe.exo_app;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v17.leanback.widget.HorizontalGridView;
@@ -36,11 +38,17 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by Felipe on 18/08/2017.
@@ -51,12 +59,14 @@ import java.util.ArrayList;
 public class Activity_Principal extends AppCompatActivity {
     private static final String TAG = Activity_Principal.class.getSimpleName();
 
-    private GridView mGridView;
+    private GridView mGridView, mGridView2, mGridView3, mGridView4;
     private ProgressBar mProgressBar;
+    private TextView txt_key_1, txt_key_2, txt_key_3;
 
-    private GridViewAdapter mGridAdapter;
-    private ArrayList<VideoItem> mGridData;
-    private String FEED_URL = "http://daf92f11.ngrok.io/api/dependence/";
+    private GridViewAdapter mGridAdapter, mGridAdapter2, mGridAdapter3, mGridAdapter4;
+    private ArrayList<VideoItem> mGridData, mGridData2,mGridData3,mGridData4;
+    private ImageView thumb_principal;
+    private String FEED_URL = "http://blessplay.com.br/api/dependence";
     //private String FEED_URL = "http://javatechig.com/?json=get_recent_posts&count=45";
 
     @Override
@@ -65,18 +75,51 @@ public class Activity_Principal extends AppCompatActivity {
         setContentView(R.layout.content_principal);
 
         mGridView = (GridView)findViewById(R.id.gridView);
+        mGridView2 = (GridView)findViewById(R.id.gridView_2);
+        mGridView3 = (GridView)findViewById(R.id.gridView_3);
+        mGridView4 = (GridView)findViewById(R.id.gridView_4);
         mProgressBar = (ProgressBar)findViewById(R.id.progressBar);
+        thumb_principal = (ImageView)findViewById(R.id.thumb_principal);
+
+        txt_key_1 = (TextView)findViewById(R.id.textView_Key1);
+        txt_key_2 = (TextView)findViewById(R.id.textView_Key2);
+        txt_key_3 = (TextView)findViewById(R.id.textView_Key3);
+
+
+
+
 
         //Initialize with empty data
         mGridData = new ArrayList<>();
+        mGridData2 = new ArrayList<>();
+        mGridData3 = new ArrayList<>();
+        mGridData4 = new ArrayList<>();
+
+        mGridView.setNumColumns(8);
+        mGridView2.setNumColumns(8);
+        mGridView3.setNumColumns(8);
+        mGridView4.setNumColumns(8);
+
         mGridAdapter = new GridViewAdapter(this, R.layout.video_item, mGridData);
         mGridView.setAdapter(mGridAdapter);
 
+        mGridAdapter2 = new GridViewAdapter(this, R.layout.video_item, mGridData2);
+        mGridView2.setAdapter(mGridAdapter2);
+
+        mGridAdapter3 = new GridViewAdapter(this, R.layout.video_item, mGridData3);
+        mGridView3.setAdapter(mGridAdapter3);
+
+        mGridAdapter4 = new GridViewAdapter(this, R.layout.video_item, mGridData4);
+        mGridView4.setAdapter(mGridAdapter4);
+
         //Grid view click event
+
+        /*
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 //Get item at position
                 VideoItem item = (VideoItem) parent.getItemAtPosition(position);
+
 
                 Intent intent = new Intent(Activity_Principal.this, DetailsActivity.class);
                 ImageView imageView = (ImageView) v.findViewById(R.id.grid_item_image);
@@ -101,6 +144,7 @@ public class Activity_Principal extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        */
 
         //Start download
         new AsyncHttpTask().execute(FEED_URL);
@@ -113,40 +157,53 @@ public class Activity_Principal extends AppCompatActivity {
 
         @Override
         protected Integer doInBackground(String... params) {
-            Integer result = 0;
+            //Integer result;
+            Integer statusCode = 0;
             try {
                 // Create Apache HttpClient
                 HttpClient httpclient = new DefaultHttpClient();
                 HttpGet httpGet = new HttpGet(params[0]);
-                httpGet.setHeader("Authorization", "Bearer");
+                httpGet.setHeader("Authorization",
+                        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly9ibGVzc3BsYXkuY29tLmJyL2FwaS9sb2dpbiIsImlhdCI6MTUwNTQwNTQzNywiZXhwIjoxNTA1NDgyMjM3LCJuYmYiOjE1MDU0MDU0MzcsImp0aSI6IlBsOWNLcjg0T3dQc3JydVEifQ.GYu-6V-g7l7bs2_grGtUJt0WLIA1WsWphYM4MVdzs6w");
                 HttpResponse httpResponse = httpclient.execute(httpGet);
                 //HttpResponse httpResponse = httpclient.execute(new HttpGet(params[0]));
 
-                int statusCode = httpResponse.getStatusLine().getStatusCode();
+                String response = streamToString(httpResponse.getEntity().getContent());
+                Log.d("doInBackground", "Response: " + response);
+                makeTitle(response);
+                parseResult(response);
 
+                statusCode = httpResponse.getStatusLine().getStatusCode();
+
+                /*
                 // 200 represents HTTP OK
                 if (statusCode == 200) {
                     String response = streamToString(httpResponse.getEntity().getContent());
                     parseResult(response);
-                    result = 1; // Successful
+                    result = statusCode; // Successful
                 } else {
                     result = 0; //"Failed
-                }
+                }*/
             } catch (Exception e) {
                 Log.d(TAG, e.getLocalizedMessage());
             }
 
-            return result;
+            return statusCode;
         }
 
         @Override
         protected void onPostExecute(Integer result) {
             // Download complete. Lets update UI
 
-            if (result == 1) {
+            if (result == 200) {
+                Toast.makeText(Activity_Principal.this, "Status Code: "+result, Toast.LENGTH_SHORT).show();
                 mGridAdapter.setGridData(mGridData);
+                mGridAdapter2.setGridData(mGridData2);
+                mGridAdapter3.setGridData(mGridData3);
+                mGridAdapter4.setGridData(mGridData4);
             } else {
-                Toast.makeText(Activity_Principal.this, "Failed to fetch data!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Activity_Principal.this, "Status Code: "+result, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Activity_Principal.this, "Failed to fetch data!", Toast.LENGTH_SHORT).show();
             }
 
             //Hide progressbar
@@ -175,7 +232,183 @@ public class Activity_Principal extends AppCompatActivity {
      *
      * @param result
      */
-    private void parseResult(String result) {
+    //parser do json da API
+    private void parseResult(String result) throws IOException {
+        try {
+            JSONObject response = new JSONObject(result);
+            VideoItem item = null;
+            Iterator<?> iterator = response.keys();
+            Log.d("Parser", "PARSER RESULT ");
+            int count = 0;
+            while(iterator.hasNext()){
+                String key = (String)iterator.next();
+                Log.d("Parser", "JSON key: " + key);
+
+            //for(String key : response.keys()){
+                if(count == 1) {
+                    Object o = response.get(key);
+                    if (o instanceof JSONArray) {
+                        JSONArray jsonA = (JSONArray) o;
+                        Log.d("Parser", "JSON Array: " + jsonA);
+                        int numberOfItems = jsonA.length();
+                        for (int i = 0; i < numberOfItems; i++) {
+
+                            JSONObject jsonO = jsonA.optJSONObject(i);
+                            Log.d("Parser", "JSON Object: " + jsonO);
+                            //if (jsonO == null) {
+                            String title = jsonO.getString("title");
+                            Log.d("Parser", "JSON Title: " + title);
+                            String thumb = jsonO.getString("thumb");
+                            Log.d("Parser", "JSON Thumb: " + thumb);
+
+                            URL url = new URL(thumb);
+                            //Bitmap thumb_bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+
+                            Bitmap thumb_bmp = BitmapFactory.decodeFile(thumb);
+
+                            item = new VideoItem();
+                            item.setTitle(title);
+                            //if (thumb_bmp != null) {
+                            item.setImage(thumb_bmp);
+                            //}
+
+                            mGridData.add(item);
+//                        }
+                        }
+                    }
+                } else if(count == 2) {
+                    Object o = response.get(key);
+                    if (o instanceof JSONArray) {
+                        JSONArray jsonA = (JSONArray) o;
+                        Log.d("Parser", "JSON Array: " + jsonA);
+                        int numberOfItems = jsonA.length();
+                        for (int i = 0; i < numberOfItems; i++) {
+
+                            JSONObject jsonO = jsonA.optJSONObject(i);
+                            Log.d("Parser", "JSON Object: " + jsonO);
+                            //if (jsonO == null) {
+                            String title = jsonO.getString("title");
+                            Log.d("Parser", "JSON Title: " + title);
+                            String thumb = jsonO.getString("thumb");
+                            Log.d("Parser", "JSON Thumb: " + thumb);
+
+                            URL url = new URL(thumb);
+                            Bitmap thumb_bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+
+                            item = new VideoItem();
+                            item.setTitle(title);
+                            //if (thumb_bmp != null) {
+                            item.setImage(thumb_bmp);
+                            //}
+
+                            mGridData2.add(item);
+//                        }
+                        }
+                    }
+                } else if(count == 3) {
+                    Object o = response.get(key);
+                    if (o instanceof JSONArray) {
+                        JSONArray jsonA = (JSONArray) o;
+                        Log.d("Parser", "JSON Array: " + jsonA);
+                        int numberOfItems = jsonA.length();
+                        for (int i = 0; i < numberOfItems; i++) {
+
+                            JSONObject jsonO = jsonA.optJSONObject(i);
+                            Log.d("Parser", "JSON Object: " + jsonO);
+                            //if (jsonO == null) {
+                            String title = jsonO.getString("title");
+                            Log.d("Parser", "JSON Title: " + title);
+                            String thumb = jsonO.getString("thumb");
+                            Log.d("Parser", "JSON Thumb: " + thumb);
+
+                            URL url = new URL(thumb);
+                            Bitmap thumb_bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+
+                            item = new VideoItem();
+                            item.setTitle(title);
+                            //if (thumb_bmp != null) {
+                            item.setImage(thumb_bmp);
+                            //}
+
+                            mGridData3.add(item);
+//                        }
+                        }
+                    }
+                }else if(count == 4) {
+                    Object o = response.get(key);
+                    if (o instanceof JSONArray) {
+                        JSONArray jsonA = (JSONArray) o;
+                        Log.d("Parser", "JSON Array: " + jsonA);
+                        int numberOfItems = jsonA.length();
+                        for (int i = 0; i < numberOfItems; i++) {
+
+                            JSONObject jsonO = jsonA.optJSONObject(i);
+                            Log.d("Parser", "JSON Object: " + jsonO);
+                            //if (jsonO == null) {
+                            String title = jsonO.getString("title");
+                            Log.d("Parser", "JSON Title: " + title);
+                            String thumb = jsonO.getString("thumb");
+                            Log.d("Parser", "JSON Thumb: " + thumb);
+
+                            URL url = new URL(thumb);
+                            Bitmap thumb_bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+
+                            item = new VideoItem();
+                            item.setTitle(title);
+                            //if (thumb_bmp != null) {
+                            item.setImage(thumb_bmp);
+                            //}
+
+                            mGridData4.add(item);
+//                        }
+                        }
+                    }
+                }
+                count++;
+                }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void makeTitle(final String result) throws IOException {
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    JSONObject response = new JSONObject(result);
+                    Iterator<?> iterator = response.keys();
+                    Log.d("Parser", "MAKE TITLE ");
+                    int count = 0;
+                    while (iterator.hasNext()) {
+                        String key = (String) iterator.next();
+                        Log.d("Parser", "JSON Title key: " + key);
+                        Log.d("Parser", "count: " + count);
+                        if(count == 2){
+                            txt_key_1.setText(key);
+                        }else if(count == 3){
+                            txt_key_2.setText(key);
+                        }else if(count == 4){
+                            txt_key_3.setText(key);
+                        }
+                        count++;
+                    }
+                }catch(JSONException e){
+                    e.printStackTrace();
+                }
+
+
+            }
+        });
+
+
+    }
+
+    //Parse do json do exemplo
+
+
+    /*private void parseResult(String result) {
         try {
             JSONObject response = new JSONObject(result);
             JSONArray posts = response.optJSONArray("posts");
@@ -197,4 +430,38 @@ public class Activity_Principal extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+    //possivel solução
+
+    private void parseResult(String result) throws IOException {
+        try {
+            Toast.makeText(Activity_Principal.this, "kkk", Toast.LENGTH_SHORT).show();
+            JSONArray jsonArray = new JSONArray(result);
+            VideoItem item;
+            for(int i=0;i<jsonArray.length();i++){
+                JSONObject object = jsonArray.getJSONObject(i);
+                JSONArray lancamento = object.getJSONArray("lançamento");
+                for(int j=0;j<lancamento.length();j++){
+                    JSONObject lancamento_type = lancamento.getJSONObject(j);
+                    String title = lancamento_type.getString("title");
+                    String thumb = lancamento_type.getString("thumb");
+                    URL url = new URL(thumb);
+                    Bitmap thumb_bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+
+                    item = new VideoItem();
+                    item.setTitle(title);
+                    if(thumb_bmp != null){
+                        item.setImage(thumb_bmp);
+                    }
+                    mGridData.add(item);
+                }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    */
 }

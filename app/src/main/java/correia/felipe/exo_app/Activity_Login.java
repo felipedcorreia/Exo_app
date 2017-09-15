@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -22,11 +23,15 @@ public class Activity_Login extends AppCompatActivity {
 
 
     EditText editEmail, editPassword;
-    Button btnLogin, btnJson;
-    TextView txtRegister, txtRegisterLink, txtjson;
+    Button btnLogin;
+    TextView txtRegister, txtRegisterLink;
+
+    public String answer;
 
     public String TAG_EMAIL;
     public String TAG_PASSWORD;
+
+    private String FEED_URL = "http://blessplay.com.br/api/login";
 
 
     JSONArray user = null;
@@ -58,21 +63,27 @@ public class Activity_Login extends AppCompatActivity {
                 //Log.d("Json","request");
                 new Thread() {
                     public void run() {
-                        HttpConnection.getSetDataWeb("http://8ecfbaac.ngrok.io/api/login", json);
+                        //HttpConnection.getSetDataWeb("http://8ecfbaac.ngrok.io/api/login", json);
+                        answer = HttpConnection.getSetDataWeb(FEED_URL, json);
                         //Log.i("Script", "ANSWER" + answer);
                         //int answer = HttpConnection.getStatusCode("http://8ecfbaac.ngrok.io/api/login", json);
-
-
                     }
                 }.start();
                 //Toast.makeText(getApplicationContext(),answer , Toast.LENGTH_LONG).show();
-                Log.d("Script", "ANSWER" + answer);
+                Log.d("Script", "ANSWER: " + answer);
+
+                /* com API
+                if(answer != null) {
+                    Intent login = new Intent(Activity_Login.this, Activity_Principal.class);
+                    startActivity(login);
+                }else{
+                    Toast.makeText(getApplicationContext(),answer , Toast.LENGTH_LONG).show();
+
+                }*/
+
                 Intent login = new Intent(Activity_Login.this, Activity_Principal.class);
                 startActivity(login);
-                /*if(){
-                    Intent login = new Intent();
-                    startActivity(login);
-                }*/
+
 
 
             }
@@ -106,7 +117,7 @@ public class Activity_Login extends AppCompatActivity {
         return (jObj.toString());
     }
 
-    public int answer;
+
 
     @SuppressLint("NewApi")
     private void callserver(final String data) {

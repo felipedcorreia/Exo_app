@@ -5,11 +5,13 @@
     android:orientation="vertical"
     android:padding="5dp">
 
-    <ImageView
+
+    <com.loopj.android.image.SmartImageView
         android:id="@+id/video_item_image"
         android:layout_width="100dp"
         android:scaleType="fitCenter"
-        android:layout_height="100dp" />
+        android:layout_height="100dp"
+        />
 
     <TextView
         android:id="@+id/video_item_title"
