@@ -27,6 +27,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.loopj.android.image.SmartImageView;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -164,7 +165,7 @@ public class Activity_Principal extends AppCompatActivity {
                 HttpClient httpclient = new DefaultHttpClient();
                 HttpGet httpGet = new HttpGet(params[0]);
                 httpGet.setHeader("Authorization",
-                        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly9ibGVzc3BsYXkuY29tLmJyL2FwaS9sb2dpbiIsImlhdCI6MTUwNTQwNTQzNywiZXhwIjoxNTA1NDgyMjM3LCJuYmYiOjE1MDU0MDU0MzcsImp0aSI6IlBsOWNLcjg0T3dQc3JydVEifQ.GYu-6V-g7l7bs2_grGtUJt0WLIA1WsWphYM4MVdzs6w");
+                        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly9ibGVzc3BsYXkuY29tLmJyL2FwaS9sb2dpbiIsImlhdCI6MTUwNTQ5ODI4OCwiZXhwIjoxNTA1NTc1MDg4LCJuYmYiOjE1MDU0OTgyODgsImp0aSI6IkdtRDBlMTVzR2lJbWZKTkgifQ.DtH4KKpjqTNy6soYbkiUU7-2HPrqZA0uBvl00v7mGiQ");
                 HttpResponse httpResponse = httpclient.execute(httpGet);
                 //HttpResponse httpResponse = httpclient.execute(new HttpGet(params[0]));
 
@@ -261,15 +262,15 @@ public class Activity_Principal extends AppCompatActivity {
                             String thumb = jsonO.getString("thumb");
                             Log.d("Parser", "JSON Thumb: " + thumb);
 
-                            URL url = new URL(thumb);
+                            //URL url = new URL(thumb);
                             //Bitmap thumb_bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
 
-                            Bitmap thumb_bmp = BitmapFactory.decodeFile(thumb);
+                            //Bitmap thumb_bmp = BitmapFactory.decodeFile(thumb);
 
                             item = new VideoItem();
                             item.setTitle(title);
                             //if (thumb_bmp != null) {
-                            item.setImage(thumb_bmp);
+                            item.setImage(thumb);
                             //}
 
                             mGridData.add(item);
@@ -298,7 +299,7 @@ public class Activity_Principal extends AppCompatActivity {
                             item = new VideoItem();
                             item.setTitle(title);
                             //if (thumb_bmp != null) {
-                            item.setImage(thumb_bmp);
+                            item.setImage(thumb);
                             //}
 
                             mGridData2.add(item);
@@ -321,13 +322,13 @@ public class Activity_Principal extends AppCompatActivity {
                             String thumb = jsonO.getString("thumb");
                             Log.d("Parser", "JSON Thumb: " + thumb);
 
-                            URL url = new URL(thumb);
-                            Bitmap thumb_bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                            /*URL url = new URL(thumb);
+                            Bitmap thumb_bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());*/
 
                             item = new VideoItem();
                             item.setTitle(title);
                             //if (thumb_bmp != null) {
-                            item.setImage(thumb_bmp);
+                            item.setImage(thumb);
                             //}
 
                             mGridData3.add(item);
@@ -350,13 +351,13 @@ public class Activity_Principal extends AppCompatActivity {
                             String thumb = jsonO.getString("thumb");
                             Log.d("Parser", "JSON Thumb: " + thumb);
 
-                            URL url = new URL(thumb);
-                            Bitmap thumb_bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                            /*URL url = new URL(thumb);
+                            Bitmap thumb_bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());*/
 
                             item = new VideoItem();
                             item.setTitle(title);
                             //if (thumb_bmp != null) {
-                            item.setImage(thumb_bmp);
+                            item.setImage(thumb);
                             //}
 
                             mGridData4.add(item);

@@ -15,6 +15,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.loopj.android.image.SmartImage;
+import com.loopj.android.image.SmartImageView;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
@@ -26,6 +29,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,27 +38,27 @@ import java.util.List;
  */
 
 
-  public class VideoItem{
-        private Bitmap image;
-        private String title;
+public class VideoItem{
+    private String image;
+    private String title;
 
-        public VideoItem() {
-            super();
-        }
-
-        public Bitmap getImage() {
-            return image;
-        }
-
-        public void setImage(Bitmap image) {
-            this.image = image;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
-        }
+    public VideoItem() {
+        super();
     }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+}

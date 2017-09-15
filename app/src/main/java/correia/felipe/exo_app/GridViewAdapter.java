@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
+import com.loopj.android.image.SmartImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -60,7 +61,7 @@ public class GridViewAdapter extends ArrayAdapter<VideoItem> {
             row = inflater.inflate(layoutResourceId, parent, false);
             holder = new ViewHolder();
             holder.titleTextView = (TextView) row.findViewById(R.id.video_item_title);
-            holder.imageView = (ImageView) row.findViewById(R.id.video_item_image);
+            holder.imageView = (SmartImageView) row.findViewById(R.id.video_item_image);
             row.setTag(holder);
         } else {
             holder = (ViewHolder) row.getTag();
@@ -75,6 +76,6 @@ public class GridViewAdapter extends ArrayAdapter<VideoItem> {
 
     static class ViewHolder {
         TextView titleTextView;
-        ImageView imageView;
+        SmartImageView imageView;
     }
 }
