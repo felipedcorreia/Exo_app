@@ -60,12 +60,14 @@ import java.util.Iterator;
 public class Activity_Principal extends AppCompatActivity {
     private static final String TAG = Activity_Principal.class.getSimpleName();
 
-    private GridView mGridView, mGridView2, mGridView3, mGridView4;
+    private GridView mGridView, mGridView2, mGridView3, mGridView4, mGridView5;
     private ProgressBar mProgressBar;
-    private TextView txt_key_1, txt_key_2, txt_key_3;
+    private TextView txt_key_0,txt_key_1, txt_key_2, txt_key_3;
 
     private GridViewAdapter mGridAdapter, mGridAdapter2, mGridAdapter3, mGridAdapter4;
     private ArrayList<VideoItem> mGridData, mGridData2,mGridData3,mGridData4;
+    private GridViewAdapterTop mGridAdapterTop;
+    private ArrayList<TopItem> mGridDataTop;
     private ImageView thumb_principal;
     private String FEED_URL = "http://blessplay.com.br/api/dependence";
     //private String FEED_URL = "http://javatechig.com/?json=get_recent_posts&count=45";
@@ -79,9 +81,11 @@ public class Activity_Principal extends AppCompatActivity {
         mGridView2 = (GridView)findViewById(R.id.gridView_2);
         mGridView3 = (GridView)findViewById(R.id.gridView_3);
         mGridView4 = (GridView)findViewById(R.id.gridView_4);
+        mGridView5 = (GridView)findViewById(R.id.gridView_5);
         mProgressBar = (ProgressBar)findViewById(R.id.progressBar);
-        thumb_principal = (ImageView)findViewById(R.id.thumb_principal);
 
+
+        txt_key_0 = (TextView)findViewById(R.id.textView_Key0);
         txt_key_1 = (TextView)findViewById(R.id.textView_Key1);
         txt_key_2 = (TextView)findViewById(R.id.textView_Key2);
         txt_key_3 = (TextView)findViewById(R.id.textView_Key3);
@@ -95,11 +99,13 @@ public class Activity_Principal extends AppCompatActivity {
         mGridData2 = new ArrayList<>();
         mGridData3 = new ArrayList<>();
         mGridData4 = new ArrayList<>();
+        mGridDataTop = new ArrayList<>();
 
         mGridView.setNumColumns(8);
         mGridView2.setNumColumns(8);
         mGridView3.setNumColumns(8);
         mGridView4.setNumColumns(8);
+        mGridView5.setNumColumns(1);
 
         mGridAdapter = new GridViewAdapter(this, R.layout.video_item, mGridData);
         mGridView.setAdapter(mGridAdapter);
@@ -113,9 +119,12 @@ public class Activity_Principal extends AppCompatActivity {
         mGridAdapter4 = new GridViewAdapter(this, R.layout.video_item, mGridData4);
         mGridView4.setAdapter(mGridAdapter4);
 
+        mGridAdapterTop = new GridViewAdapterTop(this, R.layout.top_item, mGridDataTop);
+        mGridView5.setAdapter(mGridAdapterTop);
+
         //Grid view click event
 
-        /*
+
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 //Get item at position
@@ -123,7 +132,8 @@ public class Activity_Principal extends AppCompatActivity {
 
 
                 Intent intent = new Intent(Activity_Principal.this, DetailsActivity.class);
-                ImageView imageView = (ImageView) v.findViewById(R.id.grid_item_image);
+                //ImageView imageView = (ImageView) v.findViewById(R.id.grid_item_image);
+                SmartImageView imageView = (SmartImageView) v.findViewById(R.id.video_item_image);
 
                 // Interesting data to pass across are the thumbnail size/location, the
                 // resourceId of the source bitmap, the picture description, and the
@@ -145,7 +155,7 @@ public class Activity_Principal extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        */
+
 
         //Start download
         new AsyncHttpTask().execute(FEED_URL);
@@ -165,7 +175,7 @@ public class Activity_Principal extends AppCompatActivity {
                 HttpClient httpclient = new DefaultHttpClient();
                 HttpGet httpGet = new HttpGet(params[0]);
                 httpGet.setHeader("Authorization",
-                        "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly9ibGVzc3BsYXkuY29tLmJyL2FwaS9sb2dpbiIsImlhdCI6MTUwNTQ5ODI4OCwiZXhwIjoxNTA1NTc1MDg4LCJuYmYiOjE1MDU0OTgyODgsImp0aSI6IkdtRDBlMTVzR2lJbWZKTkgifQ.DtH4KKpjqTNy6soYbkiUU7-2HPrqZA0uBvl00v7mGiQ");
+                        "Bearer                       eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly9ibGVzc3BsYXkuY29tLmJyL2FwaS9sb2dpbiIsImlhdCI6MTUwNTc0NjgzNSwiZXhwIjoxNTA1ODIzNjM1LCJuYmYiOjE1MDU3NDY4MzUsImp0aSI6IkdnRWhVWXA2bU5zSnZEZTkifQ.fA6qQEo7cqtVVKXNBBJxJFZ-1PTzrL4IkLq1OMmlbhw");
                 HttpResponse httpResponse = httpclient.execute(httpGet);
                 //HttpResponse httpResponse = httpclient.execute(new HttpGet(params[0]));
 
@@ -202,6 +212,7 @@ public class Activity_Principal extends AppCompatActivity {
                 mGridAdapter2.setGridData(mGridData2);
                 mGridAdapter3.setGridData(mGridData3);
                 mGridAdapter4.setGridData(mGridData4);
+                mGridAdapterTop.setGridData(mGridDataTop);
             } else {
                 Toast.makeText(Activity_Principal.this, "Status Code: "+result, Toast.LENGTH_SHORT).show();
                 //Toast.makeText(Activity_Principal.this, "Failed to fetch data!", Toast.LENGTH_SHORT).show();
@@ -238,6 +249,7 @@ public class Activity_Principal extends AppCompatActivity {
         try {
             JSONObject response = new JSONObject(result);
             VideoItem item = null;
+            TopItem topItem = null;
             Iterator<?> iterator = response.keys();
             Log.d("Parser", "PARSER RESULT ");
             int count = 0;
@@ -245,8 +257,22 @@ public class Activity_Principal extends AppCompatActivity {
                 String key = (String)iterator.next();
                 Log.d("Parser", "JSON key: " + key);
 
-            //for(String key : response.keys()){
-                if(count == 1) {
+                if(count == 0) {
+                    Object obj = response.get(key);
+                    if (obj instanceof JSONArray) {
+                        JSONObject jsonObject = (JSONObject) obj;
+                        String title = jsonObject.getString("title");
+                        Log.d("Parser", "JSON Title: " + title);
+                        String thumb = jsonObject.getString("thumb");
+                        Log.d("Parser", "JSON Thumb: " + thumb);
+                        topItem = new TopItem();
+                        topItem.setTitle(title);
+                        topItem.setImage(thumb);
+
+
+                        mGridDataTop.add(topItem);
+                    }
+                }else if(count == 1) {
                     Object o = response.get(key);
                     if (o instanceof JSONArray) {
                         JSONArray jsonA = (JSONArray) o;
@@ -256,22 +282,21 @@ public class Activity_Principal extends AppCompatActivity {
 
                             JSONObject jsonO = jsonA.optJSONObject(i);
                             Log.d("Parser", "JSON Object: " + jsonO);
-                            //if (jsonO == null) {
+
                             String title = jsonO.getString("title");
                             Log.d("Parser", "JSON Title: " + title);
                             String thumb = jsonO.getString("thumb");
                             Log.d("Parser", "JSON Thumb: " + thumb);
+                            String description = jsonO.getString("description");
+                            Log.d("Parser", "JSON Thumb: " + description);
 
-                            //URL url = new URL(thumb);
-                            //Bitmap thumb_bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-
-                            //Bitmap thumb_bmp = BitmapFactory.decodeFile(thumb);
 
                             item = new VideoItem();
                             item.setTitle(title);
                             //if (thumb_bmp != null) {
                             item.setImage(thumb);
                             //}
+                            item.setDescription(description);
 
                             mGridData.add(item);
 //                        }
@@ -292,6 +317,8 @@ public class Activity_Principal extends AppCompatActivity {
                             Log.d("Parser", "JSON Title: " + title);
                             String thumb = jsonO.getString("thumb");
                             Log.d("Parser", "JSON Thumb: " + thumb);
+                            String description = jsonO.getString("description");
+                            Log.d("Parser", "JSON Thumb: " + description);
 
                             URL url = new URL(thumb);
                             Bitmap thumb_bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
@@ -301,6 +328,7 @@ public class Activity_Principal extends AppCompatActivity {
                             //if (thumb_bmp != null) {
                             item.setImage(thumb);
                             //}
+                            item.setDescription(description);
 
                             mGridData2.add(item);
 //                        }
@@ -321,6 +349,8 @@ public class Activity_Principal extends AppCompatActivity {
                             Log.d("Parser", "JSON Title: " + title);
                             String thumb = jsonO.getString("thumb");
                             Log.d("Parser", "JSON Thumb: " + thumb);
+                            String description = jsonO.getString("description");
+                            Log.d("Parser", "JSON Thumb: " + description);
 
                             /*URL url = new URL(thumb);
                             Bitmap thumb_bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());*/
@@ -330,6 +360,7 @@ public class Activity_Principal extends AppCompatActivity {
                             //if (thumb_bmp != null) {
                             item.setImage(thumb);
                             //}
+                            item.setDescription(description);
 
                             mGridData3.add(item);
 //                        }
@@ -350,6 +381,8 @@ public class Activity_Principal extends AppCompatActivity {
                             Log.d("Parser", "JSON Title: " + title);
                             String thumb = jsonO.getString("thumb");
                             Log.d("Parser", "JSON Thumb: " + thumb);
+                            String description = jsonO.getString("description");
+                            Log.d("Parser", "JSON Thumb: " + description);
 
                             /*URL url = new URL(thumb);
                             Bitmap thumb_bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());*/
@@ -359,6 +392,7 @@ public class Activity_Principal extends AppCompatActivity {
                             //if (thumb_bmp != null) {
                             item.setImage(thumb);
                             //}
+                            item.setDescription(description);
 
                             mGridData4.add(item);
 //                        }
@@ -386,7 +420,9 @@ public class Activity_Principal extends AppCompatActivity {
                         String key = (String) iterator.next();
                         Log.d("Parser", "JSON Title key: " + key);
                         Log.d("Parser", "count: " + count);
-                        if(count == 2){
+                        if(count ==1){
+                            txt_key_0.setText(key);
+                        }else if(count == 2){
                             txt_key_1.setText(key);
                         }else if(count == 3){
                             txt_key_2.setText(key);

@@ -6,19 +6,27 @@
     android:background="#000"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/grid_item_image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:scaleType="fitCenter" />
-
     <TextView
         android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textColor="#fff"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:padding="10dp"
         android:textColor="#fff"
         android:textSize="20dp" />
+
+    <ImageView
+        android:id="@+id/grid_item_image"
+        android:layout_width="match_parent"
+        android:layout_height="519dp"
+        android:scaleType="fitCenter" />
+
 </FrameLayout>

@@ -25,6 +25,7 @@
             android:value="SvU3mhaLGcO7eiqq/+IgvqH2EraMgSNPLwpo5A==" />
 
         <activity android:name=".Activity_Principal" />
+        <activity android:name=".DetailsActivity"/>
     </application>
 
 </manifest>

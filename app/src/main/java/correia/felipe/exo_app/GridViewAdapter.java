@@ -78,4 +78,6 @@ public class GridViewAdapter extends ArrayAdapter<VideoItem> {
         TextView titleTextView;
         SmartImageView imageView;
     }
+
+
 }

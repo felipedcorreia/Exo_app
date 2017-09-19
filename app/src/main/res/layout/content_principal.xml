@@ -15,18 +15,36 @@
         android:background="#f0f0f0"
         android:layout_toEndOf="@+id/progressBar"
         android:layout_marginStart="6dp">
+        <LinearLayout
+            android:id="@+id/layout_conteudo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@+id/progressBar"
+            android:weightSum="1">
 
-        <ImageView
-            android:id="@+id/thumb_principal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_video_default" />
-
+            <GridView
+                android:id="@+id/gridView_5"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="65dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="0.98"
+                android:clickable="true"
+                android:columnWidth="100dp"
+                android:drawSelectorOnTop="true"
+                android:gravity="center"
+                android:numColumns="auto_fit"
+                android:verticalSpacing="5dp" />
+        </LinearLayout>
 
     </FrameLayout>
 
         <TextView
-            android:id="@+id/textView_Lancamento"
+            android:id="@+id/textView_Key0"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/lbl_Lancamento"
@@ -38,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView_Lancamento"
+            android:layout_below="@+id/textView_Key0"
             android:layout_marginTop="15dp">
 
             <FrameLayout
@@ -47,7 +65,7 @@
 
                 <LinearLayout
                     android:id="@+id/layout_conteudo"
-                    android:layout_width="1100dp"
+                    android:layout_width="1150dp"
                     android:layout_height="match_parent"
                     android:layout_alignParentBottom="true"
                     android:layout_toEndOf="@+id/progressBar"
@@ -55,20 +73,20 @@
 
                     <GridView
                         android:id="@+id/gridView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="140dp"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
                         android:layout_marginBottom="65dp"
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp"
+                        android:layout_weight="0.98"
                         android:clickable="true"
                         android:columnWidth="100dp"
                         android:drawSelectorOnTop="true"
                         android:gravity="center"
                         android:numColumns="auto_fit"
-                        android:verticalSpacing="5dp"
-                        android:layout_weight="15.14" />
+                        android:verticalSpacing="5dp" />
                 </LinearLayout>
             </FrameLayout>
         </HorizontalScrollView>
@@ -95,14 +113,16 @@
 
             <LinearLayout
                 android:id="@+id/linearLayout_gridtableLayout"
-                android:layout_width="900dp"
+                android:layout_width="1150dp"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_alignParentBottom="true"
+                android:layout_toEndOf="@+id/progressBar"
+                android:weightSum="1">
 
                 <GridView
                     android:id="@+id/gridView_2"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="140dp"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="65dp"
@@ -140,14 +160,16 @@
 
             <LinearLayout
                 android:id="@+id/linearLayout_gridtableLayout"
-                android:layout_width="900dp"
+                android:layout_width="1150dp"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_alignParentBottom="true"
+                android:layout_toEndOf="@+id/progressBar"
+                android:weightSum="1">
 
                 <GridView
                     android:id="@+id/gridView_3"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="140dp"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="65dp"
@@ -177,7 +199,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/layout_Key_2"
+        android:layout_below="@+id/textView_Key3"
         android:layout_marginTop="15dp">
 
         <FrameLayout
@@ -186,14 +208,16 @@
 
             <LinearLayout
                 android:id="@+id/linearLayout_gridtableLayout"
-                android:layout_width="900dp"
+                android:layout_width="1150dp"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_alignParentBottom="true"
+                android:layout_toEndOf="@+id/progressBar"
+                android:weightSum="1">
 
                 <GridView
                     android:id="@+id/gridView_4"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="140dp"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="65dp"

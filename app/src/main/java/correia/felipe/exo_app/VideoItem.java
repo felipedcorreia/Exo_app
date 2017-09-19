@@ -41,6 +41,7 @@ import java.util.List;
 public class VideoItem{
     private String image;
     private String title;
+    private String description;
 
     public VideoItem() {
         super();
@@ -60,5 +61,13 @@ public class VideoItem{
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

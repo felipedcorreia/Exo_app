@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="jwplayer-chromecast-2.7.6+24">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.android/build-cache/0034c8432dac10c183b0a85d8ccb9fa28b3656b8/output/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/0034c8432dac10c183b0a85d8ccb9fa28b3656b8/output/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
