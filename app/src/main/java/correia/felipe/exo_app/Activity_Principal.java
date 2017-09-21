@@ -149,7 +149,13 @@ public class Activity_Principal extends AppCompatActivity {
                         putExtra("width", imageView.getWidth()).
                         putExtra("height", imageView.getHeight()).
                         putExtra("title", item.getTitle()).
-                        putExtra("image", item.getImage());
+                        putExtra("thumb", item.getImage()).
+                        putExtra("cover", item.getCover()).
+                        putExtra("description", item.getDescription()).
+                        putExtra("trailer", item.getTrailer()).
+                        putExtra("duration", item.getDuration()).
+                        putExtra("year", item.getYear()).
+                        putExtra("serie", item.getSerie());
 
                 //Start details activity
                 startActivity(intent);
@@ -175,7 +181,7 @@ public class Activity_Principal extends AppCompatActivity {
                 HttpClient httpclient = new DefaultHttpClient();
                 HttpGet httpGet = new HttpGet(params[0]);
                 httpGet.setHeader("Authorization",
-                        "Bearer                       eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6Imh0dHA6Ly9ibGVzc3BsYXkuY29tLmJyL2FwaS9sb2dpbiIsImlhdCI6MTUwNTc0NjgzNSwiZXhwIjoxNTA1ODIzNjM1LCJuYmYiOjE1MDU3NDY4MzUsImp0aSI6IkdnRWhVWXA2bU5zSnZEZTkifQ.fA6qQEo7cqtVVKXNBBJxJFZ-1PTzrL4IkLq1OMmlbhw");
+                        "Bearer                       eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjIsImlzcyI6Imh0dHA6Ly9ibGVzc3BsYXkuY29tLmJyL2FwaS9sb2dpbiIsImlhdCI6MTUwNjAwNTc1OCwiZXhwIjoxNTA2MDgyNTU4LCJuYmYiOjE1MDYwMDU3NTgsImp0aSI6IktPbDJkVkx3c0pDakNDVVMifQ.9gK64KU0dcik6Es2eZaq8RfMYZFLBjZvuTd5KwqtMpU");
                 HttpResponse httpResponse = httpclient.execute(httpGet);
                 //HttpResponse httpResponse = httpclient.execute(new HttpGet(params[0]));
 
@@ -252,27 +258,29 @@ public class Activity_Principal extends AppCompatActivity {
             TopItem topItem = null;
             Iterator<?> iterator = response.keys();
             Log.d("Parser", "PARSER RESULT ");
-            int count = 0;
+            int c = 0;
             while(iterator.hasNext()){
                 String key = (String)iterator.next();
                 Log.d("Parser", "JSON key: " + key);
+                Log.d("Parser", "JSON Parser count: " + c);
 
-                if(count == 0) {
+                if(c == 0) {
                     Object obj = response.get(key);
-                    if (obj instanceof JSONArray) {
+
                         JSONObject jsonObject = (JSONObject) obj;
+                        Log.d("Parser", "JSON TOP OBJECT: " + jsonObject);
                         String title = jsonObject.getString("title");
                         Log.d("Parser", "JSON Title: " + title);
-                        String thumb = jsonObject.getString("thumb");
-                        Log.d("Parser", "JSON Thumb: " + thumb);
+                        String cover = jsonObject.getString("cover");
+                        Log.d("Parser", "JSON Thumb: " + cover);
                         topItem = new TopItem();
                         topItem.setTitle(title);
-                        topItem.setImage(thumb);
+                        topItem.setImage(cover);
 
 
                         mGridDataTop.add(topItem);
-                    }
-                }else if(count == 1) {
+
+                }else if(c == 1) {
                     Object o = response.get(key);
                     if (o instanceof JSONArray) {
                         JSONArray jsonA = (JSONArray) o;
@@ -289,20 +297,33 @@ public class Activity_Principal extends AppCompatActivity {
                             Log.d("Parser", "JSON Thumb: " + thumb);
                             String description = jsonO.getString("description");
                             Log.d("Parser", "JSON Thumb: " + description);
+                            String cover = jsonO.getString("cover");
+                            Log.d("Parser", "JSON Cover: " + cover);
+                            String trailer = jsonO.getString("trailer");
+                            Log.d("Parser", "JSON Trailer: " + trailer);
+                            String duration = jsonO.getString("duration");
+                            Log.d("Parser", "JSON Duration: " + duration);
+                            String year = jsonO.getString("year");
+                            Log.d("Parser", "JSON Year: " + year);
+                            String serie = jsonO.getString("serie");
+                            Log.d("Parser", "JSON Serie: " + serie);
 
 
                             item = new VideoItem();
                             item.setTitle(title);
-                            //if (thumb_bmp != null) {
                             item.setImage(thumb);
-                            //}
                             item.setDescription(description);
+                            item.setDuration(duration);
+                            item.setCover(cover);
+                            item.setTrailer(trailer);
+                            item.setYear(year);
+                            item.setSerie(serie);
 
                             mGridData.add(item);
 //                        }
                         }
                     }
-                } else if(count == 2) {
+                } else if(c == 2) {
                     Object o = response.get(key);
                     if (o instanceof JSONArray) {
                         JSONArray jsonA = (JSONArray) o;
@@ -312,29 +333,40 @@ public class Activity_Principal extends AppCompatActivity {
 
                             JSONObject jsonO = jsonA.optJSONObject(i);
                             Log.d("Parser", "JSON Object: " + jsonO);
-                            //if (jsonO == null) {
+
                             String title = jsonO.getString("title");
                             Log.d("Parser", "JSON Title: " + title);
                             String thumb = jsonO.getString("thumb");
                             Log.d("Parser", "JSON Thumb: " + thumb);
                             String description = jsonO.getString("description");
                             Log.d("Parser", "JSON Thumb: " + description);
+                            String cover = jsonO.getString("cover");
+                            Log.d("Parser", "JSON Cover: " + cover);
+                            String trailer = jsonO.getString("trailer");
+                            Log.d("Parser", "JSON Trailer: " + trailer);
+                            String duration = jsonO.getString("duration");
+                            Log.d("Parser", "JSON Duration: " + duration);
+                            String year = jsonO.getString("year");
+                            Log.d("Parser", "JSON Year: " + year);
+                            String serie = jsonO.getString("serie");
+                            Log.d("Parser", "JSON Serie: " + serie);
 
-                            URL url = new URL(thumb);
-                            Bitmap thumb_bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
 
                             item = new VideoItem();
                             item.setTitle(title);
-                            //if (thumb_bmp != null) {
                             item.setImage(thumb);
-                            //}
                             item.setDescription(description);
+                            item.setDuration(duration);
+                            item.setCover(cover);
+                            item.setTrailer(trailer);
+                            item.setYear(year);
+                            item.setSerie(serie);
 
                             mGridData2.add(item);
 //                        }
                         }
                     }
-                } else if(count == 3) {
+                } else if(c == 3) {
                     Object o = response.get(key);
                     if (o instanceof JSONArray) {
                         JSONArray jsonA = (JSONArray) o;
@@ -344,29 +376,39 @@ public class Activity_Principal extends AppCompatActivity {
 
                             JSONObject jsonO = jsonA.optJSONObject(i);
                             Log.d("Parser", "JSON Object: " + jsonO);
-                            //if (jsonO == null) {
+
                             String title = jsonO.getString("title");
                             Log.d("Parser", "JSON Title: " + title);
                             String thumb = jsonO.getString("thumb");
                             Log.d("Parser", "JSON Thumb: " + thumb);
                             String description = jsonO.getString("description");
                             Log.d("Parser", "JSON Thumb: " + description);
-
-                            /*URL url = new URL(thumb);
-                            Bitmap thumb_bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());*/
+                            String cover = jsonO.getString("cover");
+                            Log.d("Parser", "JSON Cover: " + cover);
+                            String trailer = jsonO.getString("trailer");
+                            Log.d("Parser", "JSON Trailer: " + trailer);
+                            String duration = jsonO.getString("duration");
+                            Log.d("Parser", "JSON Duration: " + duration);
+                            String year = jsonO.getString("year");
+                            Log.d("Parser", "JSON Year: " + year);
+                            String serie = jsonO.getString("serie");
+                            Log.d("Parser", "JSON Serie: " + serie);
 
                             item = new VideoItem();
                             item.setTitle(title);
-                            //if (thumb_bmp != null) {
                             item.setImage(thumb);
-                            //}
                             item.setDescription(description);
+                            item.setDuration(duration);
+                            item.setCover(cover);
+                            item.setTrailer(trailer);
+                            item.setYear(year);
+                            item.setSerie(serie);
 
                             mGridData3.add(item);
 //                        }
                         }
                     }
-                }else if(count == 4) {
+                }else if(c == 4) {
                     Object o = response.get(key);
                     if (o instanceof JSONArray) {
                         JSONArray jsonA = (JSONArray) o;
@@ -376,30 +418,42 @@ public class Activity_Principal extends AppCompatActivity {
 
                             JSONObject jsonO = jsonA.optJSONObject(i);
                             Log.d("Parser", "JSON Object: " + jsonO);
-                            //if (jsonO == null) {
+
                             String title = jsonO.getString("title");
                             Log.d("Parser", "JSON Title: " + title);
                             String thumb = jsonO.getString("thumb");
                             Log.d("Parser", "JSON Thumb: " + thumb);
                             String description = jsonO.getString("description");
                             Log.d("Parser", "JSON Thumb: " + description);
+                            String cover = jsonO.getString("cover");
+                            Log.d("Parser", "JSON Cover: " + cover);
+                            String trailer = jsonO.getString("trailer");
+                            Log.d("Parser", "JSON Trailer: " + trailer);
+                            String duration = jsonO.getString("duration");
+                            Log.d("Parser", "JSON Duration: " + duration);
+                            String year = jsonO.getString("year");
+                            Log.d("Parser", "JSON Year: " + year);
+                            String serie = jsonO.getString("serie");
+                            Log.d("Parser", "JSON Serie: " + serie);
 
-                            /*URL url = new URL(thumb);
-                            Bitmap thumb_bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());*/
+
 
                             item = new VideoItem();
                             item.setTitle(title);
-                            //if (thumb_bmp != null) {
                             item.setImage(thumb);
-                            //}
                             item.setDescription(description);
+                            item.setDuration(duration);
+                            item.setCover(cover);
+                            item.setTrailer(trailer);
+                            item.setYear(year);
+                            item.setSerie(serie);
 
                             mGridData4.add(item);
 //                        }
                         }
                     }
                 }
-                count++;
+                c++;
                 }
         } catch (JSONException e) {
             e.printStackTrace();

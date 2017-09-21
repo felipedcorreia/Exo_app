@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Html;
+import android.util.Log;
 import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
@@ -31,15 +32,22 @@ public class DetailsActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_view);
         ActionBar actionBar = getSupportActionBar();
-        //actionBar.hide();
+//        actionBar.hide();
         String title = getIntent().getStringExtra("title");
-        String image = getIntent().getStringExtra("image");
+        String image = getIntent().getStringExtra("cover");
         String description = getIntent().getStringExtra("description");
-        titleTextView = (TextView) findViewById(R.id.title);
-        descriptionTextView = (TextView) findViewById(R.id.description);
-        imageView = (ImageView) findViewById(R.id.video_item_image);
+        titleTextView = (TextView) findViewById(R.id.details_title);
+
+        descriptionTextView = (TextView) findViewById(R.id.details_description);
+
+        imageView = (SmartImageView) findViewById(R.id.details_image);
+        Log.d("Details Activity", "String image: " + image);
         titleTextView.setText(Html.fromHtml(title));
+        Log.d("Details Activity", "String title: " + title);
         descriptionTextView.setText(description);
-        Picasso.with(this).load(image).into(imageView);
+        Log.d("Details Activity", "String description: " + description);
+//        Picasso.with(this).load(image).into(imageView);
+        Picasso.with(this).load(String.valueOf(image)).into(imageView);
+
     }
 }

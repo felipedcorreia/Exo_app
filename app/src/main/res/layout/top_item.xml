@@ -8,13 +8,13 @@
 
 
     <com.loopj.android.image.SmartImageView
-        android:id="@+id/video_item_image"
+        android:id="@+id/videoTop_item_image"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:scaleType="fitCenter" />
+        android:scaleType="centerInside" />
 
     <TextView
-        android:id="@+id/video_item_title"
+        android:id="@+id/videoTop_item_title"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"

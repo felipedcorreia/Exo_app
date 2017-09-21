@@ -48,8 +48,8 @@ public class GridViewAdapterTop extends ArrayAdapter<TopItem> {
             LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
             row = inflater.inflate(layoutResourceId, parent, false);
             holder = new GridViewAdapter.ViewHolder();
-            //holder.titleTextView = (TextView) row.findViewById(R.id.video_item_title);
-            //holder.imageView = (SmartImageView) row.findViewById(R.id.video_item_image);
+            holder.titleTextView = (TextView) row.findViewById(R.id.videoTop_item_title);
+            holder.imageView = (SmartImageView) row.findViewById(R.id.videoTop_item_image);
             row.setTag(holder);
         } else {
             holder = (GridViewAdapter.ViewHolder) row.getTag();
