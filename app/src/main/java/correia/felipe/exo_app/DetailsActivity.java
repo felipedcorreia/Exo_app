@@ -2,6 +2,7 @@ package correia.felipe.exo_app;
 
 import android.animation.ObjectAnimator;
 import android.animation.TimeInterpolator;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Html;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
@@ -35,6 +37,7 @@ public class DetailsActivity extends ActionBarActivity {
 //        actionBar.hide();
         String title = getIntent().getStringExtra("title");
         String image = getIntent().getStringExtra("cover");
+        String id = getIntent().getStringExtra("id");
         String description = getIntent().getStringExtra("description");
         titleTextView = (TextView) findViewById(R.id.details_title);
 
@@ -48,6 +51,15 @@ public class DetailsActivity extends ActionBarActivity {
         Log.d("Details Activity", "String description: " + description);
 //        Picasso.with(this).load(image).into(imageView);
         Picasso.with(this).load(String.valueOf(image)).into(imageView);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent video = new Intent(DetailsActivity.this, Activity_Video.class);
+                video.putExtra("id", getIntent().getStringExtra("id"));
+                startActivity(video);
+            }
+        });
 
     }
 }

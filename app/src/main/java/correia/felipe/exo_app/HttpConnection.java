@@ -59,14 +59,14 @@ public class HttpConnection {
             // httpPost.setEntity(new UrlEncodedFormEntity(valores));
             HttpResponse resposta = httpClient.execute(httpPost);
             int statusCode = resposta.getStatusLine().getStatusCode();
-
+/*
             // 200 represents HTTP OK
             if (statusCode == 200) {
                 //String response = streamToString(resposta.getEntity().getContent());
                 answer = EntityUtils.toString(resposta.getEntity());
                 //parseResult(response);
                 result = 200; // Successful
-                //return (answer);
+                return (answer);
                 // 201 represents HTTP OK
             } else if(statusCode == 201){
 
@@ -74,7 +74,7 @@ public class HttpConnection {
                 answer = EntityUtils.toString(resposta.getEntity());
                 //parseResult(response);
                 result = 200; // Successful
-                //return (answer);
+                return (answer);
                 // 400 represents HTTP solicitação invalida
             } else if(statusCode == 400){
 
@@ -83,10 +83,11 @@ public class HttpConnection {
                 //parseResult(response);
                 result = 400; // FAIL
             } else{
-                answer = String.valueOf(statusCode);
+                answer = null;
+                return answer;
                 // Failed
             }
-
+*/
         } catch (NullPointerException e) {
             e.printStackTrace();
         } catch (ClientProtocolException e) {

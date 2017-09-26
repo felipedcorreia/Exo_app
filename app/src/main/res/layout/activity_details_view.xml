@@ -17,37 +17,41 @@
         <com.loopj.android.image.SmartImageView
             android:id="@+id/details_image"
             android:layout_width="match_parent"
-            android:layout_height="337dp" />
-
-
-
+            android:layout_height="222dp"
+            android:layout_gravity="start" />
 
         <TextView
             android:id="@+id/details_title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:padding="10dp"
             android:textColor="#fff"
             android:textSize="20dp" />
 
-    </LinearLayout>
-    <LinearLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-    <TextView
-            android:id="@+id/details_description"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:padding="10dp"
-            android:textColor="#fff"
-            android:textSize="20dp" />
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom">
+
+
+            <LinearLayout
+                android:id="@+id/layout_description"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/details_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:textColor="#fff"
+                    android:textSize="20dp" />
+            </LinearLayout>
+        </ScrollView>
+
 
     </LinearLayout>
-
-
 
 </FrameLayout>
