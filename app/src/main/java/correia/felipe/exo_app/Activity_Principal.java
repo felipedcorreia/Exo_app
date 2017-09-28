@@ -60,6 +60,7 @@ import java.util.Iterator;
 public class Activity_Principal extends AppCompatActivity {
     private static final String TAG = Activity_Principal.class.getSimpleName();
 
+
     private GridView mGridView, mGridView2, mGridView3, mGridView4, mGridView5;
     private ProgressBar mProgressBar;
     private TextView txt_key_0,txt_key_1, txt_key_2, txt_key_3;
@@ -69,13 +70,18 @@ public class Activity_Principal extends AppCompatActivity {
     private GridViewAdapterTop mGridAdapterTop;
     private ArrayList<TopItem> mGridDataTop;
     private ImageView thumb_principal;
-    private String FEED_URL = "http://blessp.azurewebsites.net/api/dependence/";
+//    private String FEED_URL = "http://blessp.azurewebsites.net/api/dependence/";
+    private String FEED_URL = "http://192.168.0.14:8000/api/dependence/";
     //private String FEED_URL = "http://javatechig.com/?json=get_recent_posts&count=45";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_principal);
+        final String token = getIntent().getStringExtra("token");
+
+
+
 
         mGridView = (GridView)findViewById(R.id.gridView);
         mGridView2 = (GridView)findViewById(R.id.gridView_2);
@@ -158,7 +164,8 @@ public class Activity_Principal extends AppCompatActivity {
                             putExtra("trailer", item.getTrailer()).
                             putExtra("duration", item.getDuration()).
                             putExtra("year", item.getYear()).
-                            putExtra("serie", item.getSerie());
+                            putExtra("serie", item.getSerie()).
+                            putExtra("token", token);
 
                     //Start details activity
                     startActivity(intent);
@@ -189,7 +196,8 @@ public class Activity_Principal extends AppCompatActivity {
                             putExtra("trailer", item.getTrailer()).
                             putExtra("duration", item.getDuration()).
                             putExtra("year", item.getYear()).
-                            putExtra("serie", item.getSerie());
+                            putExtra("serie", item.getSerie()).
+                            putExtra("token", token);
 
                     //Start details activity
                     startActivity(intent);
@@ -232,7 +240,8 @@ public class Activity_Principal extends AppCompatActivity {
                         putExtra("trailer", item.getTrailer()).
                         putExtra("duration", item.getDuration()).
                         putExtra("year", item.getYear()).
-                        putExtra("serie", item.getSerie());
+                        putExtra("serie", item.getSerie()).
+                        putExtra("token", token);
 
                 //Start details activity
                 startActivity(intent);
@@ -305,7 +314,8 @@ public class Activity_Principal extends AppCompatActivity {
                         putExtra("trailer", item.getTrailer()).
                         putExtra("duration", item.getDuration()).
                         putExtra("year", item.getYear()).
-                        putExtra("serie", item.getSerie());
+                        putExtra("serie", item.getSerie()).
+                        putExtra("token", token);
 
                 //Start details activity
                 startActivity(intent);
@@ -378,8 +388,8 @@ public class Activity_Principal extends AppCompatActivity {
                         putExtra("trailer", item.getTrailer()).
                         putExtra("duration", item.getDuration()).
                         putExtra("year", item.getYear()).
-                        putExtra("serie", item.getSerie());
-
+                        putExtra("serie", item.getSerie()).
+                        putExtra("token", token);
                 //Start details activity
                 startActivity(intent);
                /* } else{
@@ -451,7 +461,8 @@ public class Activity_Principal extends AppCompatActivity {
                         putExtra("trailer", item.getTrailer()).
                         putExtra("duration", item.getDuration()).
                         putExtra("year", item.getYear()).
-                        putExtra("serie", item.getSerie());
+                        putExtra("serie", item.getSerie()).
+                        putExtra("token", token);
 
                 //Start details activity
                 startActivity(intent);
@@ -507,12 +518,14 @@ public class Activity_Principal extends AppCompatActivity {
         protected Integer doInBackground(String... params) {
             //Integer result;
             Integer statusCode = 0;
+            String tokenParser = getIntent().getStringExtra("token");
+
             try {
                 // Create Apache HttpClient
                 HttpClient httpclient = new DefaultHttpClient();
                 HttpGet httpGet = new HttpGet(params[0]);
                 httpGet.setHeader("Authorization",
-                        "Bearer  eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImlzcyI6Imh0dHA6Ly9ibGVzc3AuYXp1cmV3ZWJzaXRlcy5uZXQvYXBpL2xvZ2luIiwiaWF0IjoxNTA2NDUzMjE3LCJleHAiOjE1MDY1MzAwMTcsIm5iZiI6MTUwNjQ1MzIxNywianRpIjoiQ3hYZXFlcUplRjdaaEowVyJ9.Hx2kQDKcGbi7hZR3YXkzm1jHzpJGchTrjjKWUM2JbUc");
+                        "Bearer" + tokenParser);
                 HttpResponse httpResponse = httpclient.execute(httpGet);
                 //HttpResponse httpResponse = httpclient.execute(new HttpGet(params[0]));
 
@@ -669,6 +682,7 @@ public class Activity_Principal extends AppCompatActivity {
                             item.setTrailer(trailer);
                             item.setYear(year);
                             item.setSerie(serie);
+                            item.setId(id);
 
                             mGridData.add(item);
 //                        }
@@ -714,6 +728,7 @@ public class Activity_Principal extends AppCompatActivity {
                             item.setTrailer(trailer);
                             item.setYear(year);
                             item.setSerie(serie);
+                            item.setId(id);
 
                             mGridData2.add(item);
 //                        }
@@ -758,6 +773,7 @@ public class Activity_Principal extends AppCompatActivity {
                             item.setTrailer(trailer);
                             item.setYear(year);
                             item.setSerie(serie);
+                            item.setId(id);
 
                             mGridData3.add(item);
 //                        }
@@ -804,6 +820,7 @@ public class Activity_Principal extends AppCompatActivity {
                             item.setTrailer(trailer);
                             item.setYear(year);
                             item.setSerie(serie);
+                            item.setId(id);
 
                             mGridData4.add(item);
 //                        }

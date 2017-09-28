@@ -26,6 +26,8 @@
 
         <activity android:name=".Activity_Principal" />
         <activity android:name=".DetailsActivity"/>
+        <activity android:name=".Activity_Video"/>
+        <activity android:name=".Details_Activity_Serie"/>
     </application>
 
 </manifest>

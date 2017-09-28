@@ -6,13 +6,12 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#f0f0f0">
+        android:background="#303030">
 
     <FrameLayout
         android:id="@+id/layout_propaganda"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#f0f0f0"
         android:layout_toEndOf="@+id/progressBar"
         android:layout_marginStart="6dp">
         <LinearLayout

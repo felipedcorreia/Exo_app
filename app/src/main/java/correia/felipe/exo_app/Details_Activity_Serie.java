@@ -7,6 +7,10 @@ import android.support.v7.app.ActionBarActivity;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
+import android.webkit.CookieManager;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,11 +25,37 @@ public class Details_Activity_Serie extends ActionBarActivity {
     private TextView titleTextView;
     private TextView descriptionTextView;
     private ImageView imageView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details_view);
-        ActionBar actionBar = getSupportActionBar();
+        setContentView(R.layout.details_serie);
+        String id = getIntent().getStringExtra("id");
+        Log.d("VIDEO", "ID = " + id);
+        String token = getIntent().getStringExtra("token");
+        Log.d("VIDEO", "TOKEN = " + token);
+
+
+        WebView wv = (WebView)findViewById(R.id.webview);
+
+        WebSettings ws = wv.getSettings();
+        ws.setJavaScriptEnabled(true);
+        ws.setSupportZoom(false);
+        wv.setWebViewClient(new WebViewClient());
+
+
+        /*CookieManager.getInstance().setCookie("http://blessp.azurewebsites.net/movie/", "tk="+token);
+        wv.loadUrl("http://blessp.azurewebsites.net/movie/"+id); */
+
+        CookieManager.getInstance().setCookie("http://192.168.0.14:8000/browser/"+id, "tk="+token);
+        wv.loadUrl("http://192.168.0.14:8000/browser/"+id);
+
+    }
+
+
+}
+
+        /*ActionBar actionBar = getSupportActionBar();
 //        actionBar.hide();
         String title = getIntent().getStringExtra("title");
         String image = getIntent().getStringExtra("cover");
@@ -53,5 +83,4 @@ public class Details_Activity_Serie extends ActionBarActivity {
             }
         });
 
-    }
-}
+    }*/

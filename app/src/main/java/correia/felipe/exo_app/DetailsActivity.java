@@ -38,7 +38,11 @@ public class DetailsActivity extends ActionBarActivity {
         String title = getIntent().getStringExtra("title");
         String image = getIntent().getStringExtra("cover");
         String id = getIntent().getStringExtra("id");
+        Log.d("VIDEO", "ID = " + id);
         String description = getIntent().getStringExtra("description");
+        String token = getIntent().getStringExtra("token");
+        Log.d("VIDEO", "TOKEN = " + token);
+
         titleTextView = (TextView) findViewById(R.id.details_title);
 
         descriptionTextView = (TextView) findViewById(R.id.details_description);
@@ -56,7 +60,7 @@ public class DetailsActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Intent video = new Intent(DetailsActivity.this, Activity_Video.class);
-                video.putExtra("id", getIntent().getStringExtra("id"));
+                video.putExtra("id", getIntent().getStringExtra("id")).putExtra("token", getIntent().getStringExtra("token"));
                 startActivity(video);
             }
         });

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +33,9 @@ import java.io.IOException;
 
 public class Activity_Login extends AppCompatActivity {
 
+    protected static final int TIMER_RUNTIME = 10000;
+    protected boolean mLoading;
+    protected ProgressBar mProgressBar;
 
     EditText editEmail, editPassword;
     Button btnLogin;
@@ -42,7 +46,8 @@ public class Activity_Login extends AppCompatActivity {
     public String TAG_EMAIL;
     public String TAG_PASSWORD;
 
-    private String FEED_URL = "http://blessp.azurewebsites.net/api/login";
+    //private String FEED_URL = "http://blessp.azurewebsites.net/api/login";
+    private String FEED_URL = "http://192.168.0.14:8000/api/login";
 
 
     JSONArray user = null;
@@ -54,6 +59,8 @@ public class Activity_Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        mProgressBar = (ProgressBar) findViewById(R.id.pg_loading);
 
         editEmail = (EditText) findViewById(R.id.edt_email);
         editPassword = (EditText) findViewById(R.id.edt_password);
@@ -68,56 +75,70 @@ public class Activity_Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                final String json = makeJson(editEmail, editPassword);
-                Log.d("Script", "JSON LOGIN: " + json);
-                //callserver(json);
-                //Log.d("Json","request");
-                new Thread() {
-                    public void run() {
-                        //HttpConnection.getSetDataWeb("http://8ecfbaac.ngrok.io/api/login", json);
-                        //answer = HttpConnection.getSetDataWeb(FEED_URL, json);
-                        answer = getSetDataWeb(FEED_URL, json);
-                        //Log.i("Script", "ANSWER" + answer);
-                        //int answer = HttpConnection.getStatusCode("http://8ecfbaac.ngrok.io/api/login", json);
-                    }
-                }.start();
-                //Toast.makeText(getApplicationContext(),answer , Toast.LENGTH_LONG).show();
-                Log.d("Script", "ANSWER: " + answer);
+
+                if (editEmail.getText().length() == 0 || editPassword.getText().length() == 0) {
+                    Toast.makeText(getApplicationContext(), "Digite o usuário e/ou senha",
+                            Toast.LENGTH_LONG).show();
+                } else {
+                    mProgressBar.setVisibility(View.VISIBLE);
+                    final String json = makeJson(editEmail, editPassword);
+                    Log.d("Script", "JSON LOGIN: " + json);
+                    new Thread() {
+                        public void run() {
+
+                            try {
+                                int wait = 0;
+                                Log.d("THREAD", "INICIO DA THREAD: ");
+                                answer = getSetDataWeb(FEED_URL, json);
+                                mLoading = true;
+
+                                while (mLoading && (wait < TIMER_RUNTIME)) {
+                                    sleep(200);
+                                    if (mLoading) {
+                                        wait += 200;
+                                    }
+                                    Log.d("THREAD", "WAIT: " + wait);
+                                }
+                            } catch (InterruptedException e) {
+
+                            } finally {
+                                //    mProgressBar.setVisibility(View.GONE);
+                                //com API
+                                if (answer == null) {
+                                    Toast.makeText(getApplicationContext(), "Tente novamente", Toast.LENGTH_LONG).show();
+                                } else {
+                                    JSONObject token_json = null;
+                                    try {
+                                        token_json = new JSONObject(answer);
+                                        String token = token_json.getString("token");
+                                        Log.d("LOGIN", "TOKEN: " + token);
+                                        final Token_Item token_item = new Token_Item();
+                                        token_item.setToken(token);
+
+                                        Intent login = new Intent(Activity_Login.this, Activity_Principal.class);
+                                        login.putExtra("token", token_item.getToken());
+                                        startActivity(login);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
 
 
-                //com API
-                if(answer == null) {
-                    Toast.makeText(getApplicationContext(),"Tente novamente" , Toast.LENGTH_LONG).show();
-                }else{
-                    JSONObject token_json = null;
-                    try {
-                        token_json = new JSONObject(answer);
-                        String token = token_json.getString("token");
-                        Log.d("LOGIN", "TOKEN: " + token);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                                }
+                            }
+                        }
+                    }.start();
 
+                    Log.d("Script", "ANSWER: " + answer);
 
-                    Intent login = new Intent(Activity_Login.this, Activity_Principal.class);
-                    startActivity(login);
 
                 }
-/*
-
-                Intent login = new Intent(Activity_Login.this, Activity_Principal.class);
-                startActivity(login);
-
-*/
-
             }
         });
+
 
         txtRegisterLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 Intent register = new Intent(Activity_Login.this, Activity_register.class);
                 startActivity(register);
 
@@ -149,20 +170,12 @@ public class Activity_Login extends AppCompatActivity {
         HttpPost httpPost = new HttpPost(url);
         String answer = null;
         try {
-            // ArrayList<String> valores = new ArrayList<String>();
-            //valores.add(new BasicNameValuePair("method", method));
-            //valores.add(data);
-            //valores.add(new BasicNameValuePair("json", data));
-
-
             httpPost.setHeader("Accept", "application/json");
             httpPost.setHeader("Content-type", "application/json");
             StringEntity postString = new StringEntity(data, "UTF-8");
             httpPost.setEntity(postString);
 
-            // httpPost.setEntity(new UrlEncodedFormEntity(valores));
             HttpResponse resposta = httpClient.execute(httpPost);
-            //String s = EntityUtils.toString(resposta.getEntity());
 
             int statusCode = resposta.getStatusLine().getStatusCode();
             Log.d("LOGIN", "Status Code: " + statusCode);
@@ -211,64 +224,9 @@ public class Activity_Login extends AppCompatActivity {
 
         return answer;
     }
-/*
-private void call_api(final String email, final String password){
-
-    AsyncTask<String, String, String> sync = new AsyncTask<String, String, String>() {
-        @Override
-        protected void onPreExecute(){
-            super.onPreExecute();
-            pd.setMessage("Por favor, espere");
-            pd.show();
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            HttpClient client = new DefaultHttpClient();
-            HttpPost httpPost = new HttpPost(FEED_URL);
-            try{
-
-                httpPost.setHeader("Accept", "application/json");
-                httpPost.setHeader("Content-type", "application/json");
-                StringEntity postString = new StringEntity(, "UTF-8");
-                httpPost.setEntity(postString);
-
-                // httpPost.setEntity(new UrlEncodedFormEntity(valores));
-                HttpResponse resposta = httpClient.execute(httpPost);
-                String s = EntityUtils.toString(resposta.getEntity());
-                Log.d("LOGIN", "Resposta: " + s);
-                int statusCode = resposta.getStatusLine().getStatusCode();
-                Log.d("LOGIN", "Status Code: " + statusCode);
-                answer = EntityUtils.toString(resposta.getEntity());
 
 
-            }catch (Exception e){
-                e.printStackTrace();
-            }
 
-            return null;
-        }
-    }
-
-
-}*/
-
-
-    @SuppressLint("NewApi")
-    private void callserver(final String data) {
-        new Thread() {
-            public void run() {
-                String answer = HttpConnection.getSetDataWeb("http://8ecfbaac.ngrok.io/api/login", data);
-                //Log.i("Script", "ANSWER" + answer);
-                //    int answer = HttpConnection.getStatusCode("http://8ecfbaac.ngrok.io/api/login", data);
-                Log.d("Script", "ANSWER" + answer);
-
-            }
-        }.start();
-
-
-    }
 
 }
 

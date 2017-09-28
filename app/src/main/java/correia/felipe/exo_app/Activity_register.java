@@ -38,6 +38,8 @@ public class Activity_register extends AppCompatActivity {
     private EditText edtPassword;
     private EditText edtConfirmPassword;
 
+    private String FEED_URL = "http://blessp.azurewebsites.net/api/";
+
     private Button btnRegister;
 
     private Spinner spnPhoneType;
@@ -272,7 +274,8 @@ public class Activity_register extends AppCompatActivity {
     private void callserver(final String data) {
         new Thread() {
             public void run() {
-                String answer = HttpConnection.getSetDataWeb("http://8ecfbaac.ngrok.io/api/json", data);
+                //String answer = HttpConnection.getSetDataWeb("http://8ecfbaac.ngrok.io/api/json", data);
+                String answer = HttpConnection.getSetDataWeb(FEED_URL, data);
                 Log.i("Script", "ANSWER" + answer);
             }
         }.start();
