@@ -44,11 +44,12 @@ public class Details_Activity_Serie extends ActionBarActivity {
         wv.setWebViewClient(new WebViewClient());
 
 
-        /*CookieManager.getInstance().setCookie("http://blessp.azurewebsites.net/movie/", "tk="+token);
-        wv.loadUrl("http://blessp.azurewebsites.net/movie/"+id); */
+        CookieManager.getInstance().setCookie("http://blessp.azurewebsites.net/browser/", "tk="+token);
+        CookieManager.getInstance().setAcceptCookie(true);
+        wv.loadUrl("http://blessp.azurewebsites.net/browser/"+id);
 
-        CookieManager.getInstance().setCookie("http://192.168.0.14:8000/browser/"+id, "tk="+token);
-        wv.loadUrl("http://192.168.0.14:8000/browser/"+id);
+        /*CookieManager.getInstance().setCookie("http://192.168.0.14:8000/browser/"+id, "tk="+token);
+        wv.loadUrl("http://192.168.0.14:8000/browser/"+id);*/
 
     }
 

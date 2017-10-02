@@ -46,7 +46,7 @@ public class TopItem {
         return cover;
     }
 
-    public void setCover(){
+    public void setCover(String cover){
         this.cover = cover;
     }
 

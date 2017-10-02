@@ -1,44 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#1C1C1C"
     android:gravity="center"
-    >
+    android:weightSum="1">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="110dp"
+        app:srcCompat="@drawable/logo_blessplay" />
 
     <EditText
+        android:id="@+id/edt_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:hint="email"
-        android:ems="10"
-        android:id="@+id/edt_email"
-        android:layout_marginRight="5dp"
         android:layout_marginLeft="5dp"
-        android:background="#EEE9E9"
-        />
+        android:layout_marginRight="5dp"
+        android:layout_weight="0.02"
+        android:background="@drawable/border"
+        android:drawableLeft="@mipmap/user"
+        android:drawablePadding="2dp"
+        android:ems="10"
+        android:hint="email"
+        android:inputType="textEmailAddress"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF" />
+
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:hint="password"
+        android:textColorHint="#FFFFFF"
         android:ems="10"
         android:id="@+id/edt_password"
         android:layout_marginRight="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"
-        android:background="#EEE9E9"
-        />
-    
+        android:background="@drawable/border"
+        android:textColor="#FFFFFF"
+        android:drawableLeft="@mipmap/lock"
+        android:drawablePadding="2dp"
+
+        android:layout_weight="0.04" />
+
     <Button
+        android:id="@+id/btn_login"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:text="Entrar"
         android:layout_gravity="center_horizontal"
-        android:id="@+id/btn_login"
-        />
+        android:text="Entrar"
+        android:background="#FF1493"
+        android:textColor="#FFFAFA"
+        android:layout_marginTop="20dp"/>
 
 
     <TextView

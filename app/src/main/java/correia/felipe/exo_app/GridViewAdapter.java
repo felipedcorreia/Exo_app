@@ -60,7 +60,7 @@ public class GridViewAdapter extends ArrayAdapter<VideoItem> {
             LayoutInflater inflater = ((Activity) mContext).getLayoutInflater();
             row = inflater.inflate(layoutResourceId, parent, false);
             holder = new ViewHolder();
-            holder.titleTextView = (TextView) row.findViewById(R.id.video_item_title);
+            //holder.titleTextView = (TextView) row.findViewById(R.id.video_item_title);
             holder.imageView = (SmartImageView) row.findViewById(R.id.video_item_image);
             row.setTag(holder);
         } else {
@@ -68,7 +68,7 @@ public class GridViewAdapter extends ArrayAdapter<VideoItem> {
         }
 
         VideoItem item = mGridData.get(position);
-        holder.titleTextView.setText(Html.fromHtml(item.getTitle()));
+        //holder.titleTextView.setText(Html.fromHtml(item.getTitle()));
 
         Picasso.with(mContext).load(String.valueOf(item.getImage())).into(holder.imageView);
         return row;

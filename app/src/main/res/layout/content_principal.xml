@@ -37,7 +37,9 @@
                 android:drawSelectorOnTop="true"
                 android:gravity="center"
                 android:numColumns="auto_fit"
-                android:verticalSpacing="5dp" />
+                android:verticalSpacing="5dp"
+
+            />
         </LinearLayout>
 
     </FrameLayout>
@@ -48,6 +50,7 @@
             android:layout_height="wrap_content"
             android:text="@string/lbl_Lancamento"
             android:layout_below="@+id/layout_propaganda"
+            android:textColor="#FFFAFA"
             android:textAppearance="@android:style/TextAppearance.Medium" />
 
         <HorizontalScrollView
@@ -76,16 +79,17 @@
                         android:layout_height="140dp"
                         android:layout_alignParentBottom="true"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="65dp"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginRight="1dp"
                         android:layout_weight="0.98"
                         android:clickable="true"
                         android:columnWidth="100dp"
                         android:drawSelectorOnTop="true"
                         android:gravity="center"
                         android:numColumns="auto_fit"
-                        android:verticalSpacing="5dp" />
+                        android:verticalSpacing="5dp"
+                        android:horizontalSpacing="2dp"/>
                 </LinearLayout>
             </FrameLayout>
         </HorizontalScrollView>
@@ -96,6 +100,7 @@
             android:layout_height="wrap_content"
             android:text="@string/lbl_Lancamento"
             android:layout_below="@+id/layout_Lancamento"
+            android:textColor="#FFFAFA"
             android:textAppearance="@android:style/TextAppearance.Medium" />
 
     <HorizontalScrollView
@@ -143,6 +148,7 @@
             android:layout_height="wrap_content"
             android:text="@string/lbl_Lancamento"
             android:layout_below="@+id/layout_Key_1"
+            android:textColor="#FFFAFA"
             android:textAppearance="@android:style/TextAppearance.Medium" />
 
     <HorizontalScrollView
@@ -191,6 +197,7 @@
             android:layout_height="wrap_content"
             android:text="@string/lbl_Lancamento"
             android:layout_below="@+id/layout_Key_2"
+            android:textColor="#FFFAFA"
             android:textAppearance="@android:style/TextAppearance.Medium" />
 
     <HorizontalScrollView

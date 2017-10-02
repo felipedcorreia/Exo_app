@@ -70,8 +70,8 @@ public class Activity_Principal extends AppCompatActivity {
     private GridViewAdapterTop mGridAdapterTop;
     private ArrayList<TopItem> mGridDataTop;
     private ImageView thumb_principal;
-//    private String FEED_URL = "http://blessp.azurewebsites.net/api/dependence/";
-    private String FEED_URL = "http://192.168.0.14:8000/api/dependence/";
+    private String FEED_URL = "http://blessp.azurewebsites.net/api/dependence/";
+    //private String FEED_URL = "http://192.168.0.14:8000/api/dependence/";
     //private String FEED_URL = "http://javatechig.com/?json=get_recent_posts&count=45";
 
     @Override
@@ -431,14 +431,14 @@ public class Activity_Principal extends AppCompatActivity {
         mGridView5.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 //Get item at position
-                VideoItem item = (VideoItem) parent.getItemAtPosition(position);
+                TopItem item = (TopItem) parent.getItemAtPosition(position);
                 String serie = item.getSerie();
                 Log.d("setOnClickListener", "Serie: " + serie);
 
                 //if(serie == "0") {
                 Intent intent = new Intent(Activity_Principal.this, DetailsActivity.class);
                 //ImageView imageView = (ImageView) v.findViewById(R.id.grid_item_image);
-                SmartImageView imageView = (SmartImageView) v.findViewById(R.id.video_item_image);
+                SmartImageView imageView = (SmartImageView) v.findViewById(R.id.videoTop_item_image);
 
                 // Interesting data to pass across are the thumbnail size/location, the
                 // resourceId of the source bitmap, the picture description, and the
@@ -618,10 +618,12 @@ public class Activity_Principal extends AppCompatActivity {
                         Log.d("Parser", "JSON Id: " + id);
                         String title = jsonObject.getString("title");
                         Log.d("Parser", "JSON Title: " + title);
+                        String thumb = jsonObject.getString("thumb");
+                        Log.d("Parser", "JSON Thumb: " + thumb);
                         String cover = jsonObject.getString("cover");
-                        Log.d("Parser", "JSON Thumb: " + cover);
+                        Log.d("Parser", "JSON Cover: " + cover);
                         String description = jsonObject.getString("description");
-                        Log.d("Parser", "JSON Thumb: " + description);
+                        Log.d("Parser", "JSON Description: " + description);
                         String trailer = jsonObject.getString("trailer");
                         Log.d("Parser", "JSON Trailer: " + trailer);
                         String duration = jsonObject.getString("duration");
@@ -631,8 +633,16 @@ public class Activity_Principal extends AppCompatActivity {
                         String serie = jsonObject.getString("serie");
                         Log.d("Parser", "JSON Serie: " + serie);
                         topItem = new TopItem();
+                        topItem.setId(id);
                         topItem.setTitle(title);
-                        topItem.setImage(cover);
+                        topItem.setImage(thumb);
+                        topItem.setCover(cover);
+                        topItem.setDescription(description);
+                        topItem.setTrailer(trailer);
+                        topItem.setDuration(duration);
+                        topItem.setYear(year);
+                        topItem.setSerie(serie);
+
 
 
                         mGridDataTop.add(topItem);

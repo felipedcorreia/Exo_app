@@ -33,12 +33,12 @@ public class Activity_Video extends Activity {
         wv.setWebViewClient(new WebViewClient());
 
         //wv.loadUrl("http://www.google.com.br");
-        /*CookieManager.getInstance().setCookie("http://blessp.azurewebsites.net/movie/"+id, "tk="+token);
-        wv.loadUrl("http://blessp.azurewebsites.net/movie/"+id); */
-
+        CookieManager.getInstance().setCookie("http://blessp.azurewebsites.net/movie/"+id, "tk="+token);
+        wv.loadUrl("http://blessp.azurewebsites.net/movie/"+id);
+/*
         CookieManager.getInstance().setCookie("http://192.168.0.14:8000/movie/"+id, "tk="+token);
         wv.loadUrl("http://192.168.0.14:8000/movie/"+id);
-
+*/
     }
 
 
