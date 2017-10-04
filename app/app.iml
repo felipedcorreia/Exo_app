@@ -112,6 +112,7 @@
     <orderEntry type="library" exported="" name="exoplayer-r2.4.4" level="project" />
     <orderEntry type="library" exported="" name="transition-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="exoplayer-dash-r2.4.4" level="project" />
+    <orderEntry type="library" exported="" name="parallaxscroll-1.0" level="project" />
     <orderEntry type="library" exported="" name="palette-v7-25.0.0" level="project" />
     <orderEntry type="library" exported="" name="jwplayer-chromecast-2.7.6+24" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="exposed-instrumentation-api-publish-0.5" level="project" />
