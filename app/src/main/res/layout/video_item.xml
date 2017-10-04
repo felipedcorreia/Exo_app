@@ -3,14 +3,12 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="5dp"
     android:orientation="vertical"
-    android:padding="5dp">
-
+    android:padding="1dp">
 
     <com.loopj.android.image.SmartImageView
         android:id="@+id/video_item_image"
-        android:layout_width="200dp"
-        android:layout_height="150dp"
-        android:scaleType="fitCenter" />
-
+        android:layout_width="130dp"
+        android:layout_height="200dp"
+        android:scaleType="fitXY" />
 
 </LinearLayout>

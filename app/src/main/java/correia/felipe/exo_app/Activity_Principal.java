@@ -246,19 +246,15 @@ public class Activity_Principal extends AppCompatActivity {
                 //Start details activity
                 startActivity(intent);
                /* } else{
-
                     Intent intent = new Intent(Activity_Principal.this, Details_Activity_Serie.class);
                     //ImageView imageView = (ImageView) v.findViewById(R.id.grid_item_image);
                     SmartImageView imageView = (SmartImageView) v.findViewById(R.id.video_item_image);
-
                     // Interesting data to pass across are the thumbnail size/location, the
                     // resourceId of the source bitmap, the picture description, and the
                     // orientation (to avoid returning back to an obsolete configuration if
                     // the device rotates again in the meantime)
-
                     int[] screenLocation = new int[2];
                     imageView.getLocationOnScreen(screenLocation);
-
                     //Pass the image title and url to DetailsActivity
                     intent.putExtra("left", screenLocation[0]).
                             putExtra("top", screenLocation[1]).
@@ -273,10 +269,8 @@ public class Activity_Principal extends AppCompatActivity {
                             putExtra("duration", item.getDuration()).
                             putExtra("year", item.getYear()).
                             putExtra("serie", item.getSerie());
-
                     //Start details activity
                     startActivity(intent);
-
                 }*/
 
             }
@@ -320,19 +314,15 @@ public class Activity_Principal extends AppCompatActivity {
                 //Start details activity
                 startActivity(intent);
                /* } else{
-
                     Intent intent = new Intent(Activity_Principal.this, Details_Activity_Serie.class);
                     //ImageView imageView = (ImageView) v.findViewById(R.id.grid_item_image);
                     SmartImageView imageView = (SmartImageView) v.findViewById(R.id.video_item_image);
-
                     // Interesting data to pass across are the thumbnail size/location, the
                     // resourceId of the source bitmap, the picture description, and the
                     // orientation (to avoid returning back to an obsolete configuration if
                     // the device rotates again in the meantime)
-
                     int[] screenLocation = new int[2];
                     imageView.getLocationOnScreen(screenLocation);
-
                     //Pass the image title and url to DetailsActivity
                     intent.putExtra("left", screenLocation[0]).
                             putExtra("top", screenLocation[1]).
@@ -347,10 +337,8 @@ public class Activity_Principal extends AppCompatActivity {
                             putExtra("duration", item.getDuration()).
                             putExtra("year", item.getYear()).
                             putExtra("serie", item.getSerie());
-
                     //Start details activity
                     startActivity(intent);
-
                 }*/
 
             }
@@ -393,19 +381,15 @@ public class Activity_Principal extends AppCompatActivity {
                 //Start details activity
                 startActivity(intent);
                /* } else{
-
                     Intent intent = new Intent(Activity_Principal.this, Details_Activity_Serie.class);
                     //ImageView imageView = (ImageView) v.findViewById(R.id.grid_item_image);
                     SmartImageView imageView = (SmartImageView) v.findViewById(R.id.video_item_image);
-
                     // Interesting data to pass across are the thumbnail size/location, the
                     // resourceId of the source bitmap, the picture description, and the
                     // orientation (to avoid returning back to an obsolete configuration if
                     // the device rotates again in the meantime)
-
                     int[] screenLocation = new int[2];
                     imageView.getLocationOnScreen(screenLocation);
-
                     //Pass the image title and url to DetailsActivity
                     intent.putExtra("left", screenLocation[0]).
                             putExtra("top", screenLocation[1]).
@@ -420,10 +404,8 @@ public class Activity_Principal extends AppCompatActivity {
                             putExtra("duration", item.getDuration()).
                             putExtra("year", item.getYear()).
                             putExtra("serie", item.getSerie());
-
                     //Start details activity
                     startActivity(intent);
-
                 }*/
 
             }
@@ -467,19 +449,15 @@ public class Activity_Principal extends AppCompatActivity {
                 //Start details activity
                 startActivity(intent);
                /* } else{
-
                     Intent intent = new Intent(Activity_Principal.this, Details_Activity_Serie.class);
                     //ImageView imageView = (ImageView) v.findViewById(R.id.grid_item_image);
                     SmartImageView imageView = (SmartImageView) v.findViewById(R.id.video_item_image);
-
                     // Interesting data to pass across are the thumbnail size/location, the
                     // resourceId of the source bitmap, the picture description, and the
                     // orientation (to avoid returning back to an obsolete configuration if
                     // the device rotates again in the meantime)
-
                     int[] screenLocation = new int[2];
                     imageView.getLocationOnScreen(screenLocation);
-
                     //Pass the image title and url to DetailsActivity
                     intent.putExtra("left", screenLocation[0]).
                             putExtra("top", screenLocation[1]).
@@ -494,10 +472,8 @@ public class Activity_Principal extends AppCompatActivity {
                             putExtra("duration", item.getDuration()).
                             putExtra("year", item.getYear()).
                             putExtra("serie", item.getSerie());
-
                     //Start details activity
                     startActivity(intent);
-
                 }*/
 
             }
@@ -611,41 +587,41 @@ public class Activity_Principal extends AppCompatActivity {
                 if(c == 0) {
                     Object obj = response.get(key);
 
-                        JSONObject jsonObject = (JSONObject) obj;
-                        Log.d("Parser", "JSON TOP OBJECT: " + jsonObject);
+                    JSONObject jsonObject = (JSONObject) obj;
+                    Log.d("Parser", "JSON TOP OBJECT: " + jsonObject);
 
-                        String id = jsonObject.getString("id");
-                        Log.d("Parser", "JSON Id: " + id);
-                        String title = jsonObject.getString("title");
-                        Log.d("Parser", "JSON Title: " + title);
-                        String thumb = jsonObject.getString("thumb");
-                        Log.d("Parser", "JSON Thumb: " + thumb);
-                        String cover = jsonObject.getString("cover");
-                        Log.d("Parser", "JSON Cover: " + cover);
-                        String description = jsonObject.getString("description");
-                        Log.d("Parser", "JSON Description: " + description);
-                        String trailer = jsonObject.getString("trailer");
-                        Log.d("Parser", "JSON Trailer: " + trailer);
-                        String duration = jsonObject.getString("duration");
-                        Log.d("Parser", "JSON Duration: " + duration);
-                        String year = jsonObject.getString("year");
-                        Log.d("Parser", "JSON Year: " + year);
-                        String serie = jsonObject.getString("serie");
-                        Log.d("Parser", "JSON Serie: " + serie);
-                        topItem = new TopItem();
-                        topItem.setId(id);
-                        topItem.setTitle(title);
-                        topItem.setImage(thumb);
-                        topItem.setCover(cover);
-                        topItem.setDescription(description);
-                        topItem.setTrailer(trailer);
-                        topItem.setDuration(duration);
-                        topItem.setYear(year);
-                        topItem.setSerie(serie);
+                    String id = jsonObject.getString("id");
+                    Log.d("Parser", "JSON Id: " + id);
+                    String title = jsonObject.getString("title");
+                    Log.d("Parser", "JSON Title: " + title);
+                    String thumb = jsonObject.getString("thumb");
+                    Log.d("Parser", "JSON Thumb: " + thumb);
+                    String cover = jsonObject.getString("cover");
+                    Log.d("Parser", "JSON Cover: " + cover);
+                    String description = jsonObject.getString("description");
+                    Log.d("Parser", "JSON Description: " + description);
+                    String trailer = jsonObject.getString("trailer");
+                    Log.d("Parser", "JSON Trailer: " + trailer);
+                    String duration = jsonObject.getString("duration");
+                    Log.d("Parser", "JSON Duration: " + duration);
+                    String year = jsonObject.getString("year");
+                    Log.d("Parser", "JSON Year: " + year);
+                    String serie = jsonObject.getString("serie");
+                    Log.d("Parser", "JSON Serie: " + serie);
+                    topItem = new TopItem();
+                    topItem.setId(id);
+                    topItem.setTitle(title);
+                    topItem.setImage(thumb);
+                    topItem.setCover(cover);
+                    topItem.setDescription(description);
+                    topItem.setTrailer(trailer);
+                    topItem.setDuration(duration);
+                    topItem.setYear(year);
+                    topItem.setSerie(serie);
 
 
 
-                        mGridDataTop.add(topItem);
+                    mGridDataTop.add(topItem);
 
                 }else if(c == 1) {
                     Object o = response.get(key);
@@ -838,7 +814,7 @@ public class Activity_Principal extends AppCompatActivity {
                     }
                 }
                 c++;
-                }
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -905,9 +881,7 @@ public class Activity_Principal extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
     //possivel solução
-
     private void parseResult(String result) throws IOException {
         try {
             Toast.makeText(Activity_Principal.this, "kkk", Toast.LENGTH_SHORT).show();
@@ -922,7 +896,6 @@ public class Activity_Principal extends AppCompatActivity {
                     String thumb = lancamento_type.getString("thumb");
                     URL url = new URL(thumb);
                     Bitmap thumb_bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-
                     item = new VideoItem();
                     item.setTitle(title);
                     if(thumb_bmp != null){
@@ -930,13 +903,9 @@ public class Activity_Principal extends AppCompatActivity {
                     }
                     mGridData.add(item);
                 }
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
-
-
-
     */
 }

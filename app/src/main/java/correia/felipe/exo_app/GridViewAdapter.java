@@ -40,7 +40,6 @@ public class GridViewAdapter extends ArrayAdapter<VideoItem> {
         this.mGridData = mGridData;
     }
 
-
     /**
      * Updates grid data and refresh grid items.
      *
