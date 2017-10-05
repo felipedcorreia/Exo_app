@@ -37,5 +37,41 @@
         sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
         <dex dex="C:\Users\Felipe\Desktop\AndroidStreaming\Exo_app\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_3e0d9a0a08374b7e519f7f5832e59748838f62bc\classes.dex" />
     </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Felipe\.android\build-cache\548c2b93117991f900936a757d3943076b3b3ef1\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="ada85079ae80ef5d9e0832623561465275f8b2d8">
+        <dex dex="C:\Users\Felipe\Desktop\AndroidStreaming\Exo_app\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_c304045afe2a01e98ff01f8c775d9486c85dd7ae\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Felipe\.android\build-cache\05cc4ed685cf2083a0e33721bdfe9d1f376ad664\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="deb86c7cf55501256d61da38271684a37074be4f">
+        <dex dex="C:\Users\Felipe\Desktop\AndroidStreaming\Exo_app\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_12bc4234cd3620fef49176e6d86fa6336216c33c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Felipe\.android\build-cache\0c3e4b798339128f2a23d444dc6c765a9bac83d3\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="4c1719e1c55fbe0acd6f4a59de877222892e8384">
+        <dex dex="C:\Users\Felipe\Desktop\AndroidStreaming\Exo_app\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_c6282cfe7f64a00c92d578ec65b1a9f4b6bcfd05\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Felipe\.android\build-cache\488c6c6821cf736dc5b2067e922b6d4185a95f7f\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.3"
+        sha1="fb17fc4554092206c0becd8088963c64d7f879b7">
+        <dex dex="C:\Users\Felipe\Desktop\AndroidStreaming\Exo_app\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_b3894b36d3190b3db4360f0293f7092c4c953ebe\classes.dex" />
+    </item>
 
 </items>

@@ -37,10 +37,7 @@ import java.net.URL;
 
 public class Activity_Login extends AppCompatActivity {
 
-    protected static final int TIMER_RUNTIME = 10000;
-    public static final int READ_TIMEOUT=15000;
-    public static final int CONNECTION_TIMEOUT=10000;
-    protected boolean mLoading;
+
     protected ProgressBar mProgressBar;
 
     EditText editEmail, editPassword;
@@ -49,17 +46,11 @@ public class Activity_Login extends AppCompatActivity {
 
     public String answer;
 
-    public String TAG_EMAIL;
-    public String TAG_PASSWORD;
+
 
     private String FEED_URL = "http://blessp.azurewebsites.net/api/login";
     //private String FEED_URL = "http://192.168.0.14:8000/api/login";
 
-
-
-    JSONArray user = null;
-
-    ProgressDialog pd;
 
 
     @Override
@@ -67,7 +58,7 @@ public class Activity_Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mProgressBar = (ProgressBar) findViewById(R.id.pg_loading);
+        //mProgressBar = (ProgressBar) findViewById(R.id.pg_loading);
 
         editEmail = (EditText) findViewById(R.id.edt_email);
         editPassword = (EditText) findViewById(R.id.edt_password);
@@ -82,78 +73,19 @@ public class Activity_Login extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                //mProgressBar.setVisibility(View.VISIBLE);
+
                 if (editEmail.getText().length() == 0) {
                     editEmail.setError("Digite um email");
                     editEmail.requestFocus();
-                    mProgressBar.setVisibility(View.GONE);
-                    //Toast.makeText(getApplicationContext(), "Digite o usuário e/ou senha", Toast.LENGTH_LONG).show();
                 }
                 if(editPassword.getText().length() == 0) {
                     editPassword.setError("Digite um email");
                     editPassword.requestFocus();
-                    mProgressBar.setVisibility(View.GONE);
                 }
 
                 if(editEmail.getText().length() != 0 && editPassword.getText().length() != 0){
 
                     checkLogin();
-
-                 /*
-
-                    final String json = makeJson(editEmail, editPassword);
-                    Log.d("Script", "JSON LOGIN: " + json);
-                    new Thread() {
-                        public void run() {
-
-                            try {
-                                Log.d("THREAD", "INICIO DA THREAD: ");
-                                //Thread.sleep(10000);
-
-
-                                int wait = 0;
-                                mLoading = true;
-                                answer = getSetDataWeb(FEED_URL, json);
-                                while (mLoading && (wait < TIMER_RUNTIME)) {
-                                    sleep(200);
-                                    if (mLoading) {
-                                        wait += 200;
-                                    }
-                                    Log.d("THREAD", "WAIT: " + wait);
-                                }
-
-                                //com API
-
-                            } catch (InterruptedException e) {
-
-                            } finally {
-                                //    mProgressBar.setVisibility(View.GONE);
-
-                            }
-                        }
-                    }.start();
-                    if (answer == null) {
-                        Toast.makeText(getApplicationContext(), "Tente novamente", Toast.LENGTH_LONG).show();
-                    } else {
-                        JSONObject token_json = null;
-                        try {
-                            token_json = new JSONObject(answer);
-                            String token = token_json.getString("token");
-                            Log.d("LOGIN", "TOKEN: " + token);
-                            final Token_Item token_item = new Token_Item();
-                            token_item.setToken(token);
-
-                            Intent login = new Intent(Activity_Login.this, Activity_Principal.class);
-                            login.putExtra("token", token_item.getToken());
-                            startActivity(login);
-
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }*/
-
                 }
             }
         });
@@ -204,42 +136,6 @@ public class Activity_Login extends AppCompatActivity {
             Log.d("LOGIN", "Status Code: " + statusCode);
             answer = EntityUtils.toString(resposta.getEntity());
             Log.d("LOGIN", "Resposta: " + answer);
-
-            if(statusCode != 200){
-                Log.d("LOGIN", "USUARIO INVALIDO: " + answer);
-                answer = null;
-            }
-/*
-            // 200 represents HTTP OK
-            if (statusCode == 200) {
-                //String response = streamToString(resposta.getEntity().getContent());
-                answer = EntityUtils.toString(resposta.getEntity());
-                Log.d("LOGIN", "ANSWER 200: " + answer);
-
-                //parseResult(response);
-                return (answer);
-
-                // 201 represents HTTP OK
-            } else if(statusCode == 201){
-
-                //String response = streamToString(resposta.getEntity().getContent());
-                answer = EntityUtils.toString(resposta.getEntity());
-                Log.d("LOGIN", "ANSWER 201: " + answer);
-                //parseResult(response);
-
-                return (answer);
-                // 400 represents HTTP solicitação invalida
-            } else if(statusCode != 200 || statusCode != 201){
-
-                //String response = streamToString(resposta.getEntity().getContent());
-                answer = null;
-                Log.d("LOGIN", "ANSWER ERROR: " + answer);
-                //parseResult(response);
-
-            } else{
-                answer = null;
-                // Failed
-            }*/
 
         } catch (NullPointerException e) {
             e.printStackTrace();
