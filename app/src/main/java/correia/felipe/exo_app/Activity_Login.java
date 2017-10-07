@@ -1,11 +1,15 @@
 package correia.felipe.exo_app;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -25,11 +29,13 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Iterator;
 
 /**
  * Created by Felipe on 04/08/2017.
@@ -42,9 +48,10 @@ public class Activity_Login extends AppCompatActivity {
 
     EditText editEmail, editPassword;
     Button btnLogin;
-    TextView txtRegister, txtRegisterLink;
+    TextView txtRegister, txtRegisterLink, txtForgotPass;
 
     public String answer;
+    public String message_errror_1;
 
 
 
@@ -67,6 +74,20 @@ public class Activity_Login extends AppCompatActivity {
 
         txtRegister = (TextView) findViewById(R.id.txt_register);
         txtRegisterLink = (TextView) findViewById(R.id.txt_register_link);
+
+        txtForgotPass =(TextView) findViewById(R.id.txtForgotPassword);
+
+        txtForgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent omg_iforgot_my_password = new Intent(Activity_Login.this, Activity_Forgot_Password.class);
+                startActivity(omg_iforgot_my_password);
+
+            }
+        });
+
+
+
 
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -236,11 +257,186 @@ public class Activity_Login extends AppCompatActivity {
                         }
                     }
                 }.start();
-            }else{
+            }else if(result == 401){
+                new Thread() {
+                public void run() {
+                    try {
+                        answer = getSetDataWeb(FEED_URL, makeJson);
+                        JSONObject error_json = new JSONObject(answer);
+                        final String error_1 = error_json.getString("prompt1");
+                        Log.d("LOGIN", "Error_1: " + error_1);
+                        final String error_2 = error_json.getString("prompt2");
+                        Log.d("LOGIN", "Error_2: " + error_2);
+
+                        Handler mHandler = new Handler(Looper.getMainLooper());
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                // Your UI updates here
+                                final AlertDialog.Builder builder1 = new AlertDialog.Builder(Activity_Login.this);
+                                builder1.setMessage(error_1);
+                                builder1.setCancelable(true);
+
+                                builder1.setPositiveButton(
+                                        "SIM",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+                                                AlertDialog.Builder builder2 = new AlertDialog.Builder(Activity_Login.this);
+                                                builder2.setMessage(error_2);
+                                                builder2.setCancelable(true);
+
+                                                builder2.setNeutralButton(
+                                                        "OK",
+                                                        new DialogInterface.OnClickListener(){
+                                                            public void onClick(DialogInterface dialog, int id){
+                                                                dialog.cancel();
+                                                            }
+                                                        }
+                                                );
+                                                AlertDialog alert12 = builder2.create();
+                                                alert12.show();
+                                            }
+                                        });
+
+                                builder1.setNegativeButton(
+                                        "NÃO",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+                                                dialog.cancel();
+                                            }
+                                        });
+
+
+
+                                AlertDialog alert11 = builder1.create();
+                                alert11.show();
+                            }
+                        });
+
+
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }.start();
+
+
+
+                Toast.makeText(Activity_Login.this, "Status Code: "+result, Toast.LENGTH_SHORT).show();
+            }else if(result == 404){
+                new Thread() {
+                    public void run() {
+                        try {
+                            answer = getSetDataWeb(FEED_URL, makeJson);
+                            JSONObject error_json = new JSONObject(answer);
+                            final String error_1 = error_json.getString("error");
+                            Log.d("LOGIN", "Error_1: " + error_1);
+
+
+                            Handler mHandler = new Handler(Looper.getMainLooper());
+                            mHandler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // Your UI updates here
+                                    final AlertDialog.Builder builder1 = new AlertDialog.Builder(Activity_Login.this);
+                                    builder1.setMessage(error_1);
+                                    builder1.setCancelable(true);
+
+                                    builder1.setNeutralButton(
+                                            "OK",
+                                            new DialogInterface.OnClickListener(){
+                                                public void onClick(DialogInterface dialog, int id){
+                                                    dialog.cancel();
+                                                }
+                                            }
+                                    );
+
+
+
+                                    AlertDialog alert11 = builder1.create();
+                                    alert11.show();
+                                }
+                            });
+
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }.start();
+
+
+
+                Toast.makeText(Activity_Login.this, "Status Code: "+result, Toast.LENGTH_SHORT).show();
+            }else if(result == 403){
+                new Thread() {
+                    public void run() {
+                        try {
+                            answer = getSetDataWeb(FEED_URL, makeJson);
+                            JSONObject error_json = new JSONObject(answer);
+                            final String error_1 = error_json.getString("error");
+                            Log.d("LOGIN", "Error_1: " + error_1);
+                            final String error_2 = error_json.getString("path");
+                            Log.d("LOGIN", "Error_2: " + error_2);
+
+
+                            Handler mHandler = new Handler(Looper.getMainLooper());
+                            mHandler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // Your UI updates here
+                                    final AlertDialog.Builder builder1 = new AlertDialog.Builder(Activity_Login.this);
+                                    builder1.setMessage(error_1);
+                                    builder1.setCancelable(true);
+
+                                    builder1.setPositiveButton(
+                                            "SIM",
+                                            new DialogInterface.OnClickListener(){
+                                                public void onClick(DialogInterface dialog, int id){
+                                                    Intent viewIntent = new Intent("android.intent.action.VIEW", Uri.parse(error_2));
+                                                    startActivity(viewIntent);
+                                                }
+                                            }
+                                    );
+
+                                    builder1.setNegativeButton(
+                                            "NÃO",
+                                            new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+                                                    dialog.cancel();
+                                                }
+                                            });
+
+
+
+                                    AlertDialog alert11 = builder1.create();
+                                    alert11.show();
+                                }
+                            });
+
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }.start();
+
+
+
                 Toast.makeText(Activity_Login.this, "Status Code: "+result, Toast.LENGTH_SHORT).show();
             }
+
+            //ToDo error 422
         }
     }
+
+
 }
 
 

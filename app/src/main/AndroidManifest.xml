@@ -28,6 +28,7 @@
         <activity android:name=".DetailsActivity"/>
         <activity android:name=".Activity_Video"/>
         <activity android:name=".Details_Activity_Serie"/>
+        <activity android:name=".Activity_Forgot_Password"/>
     </application>
 
 </manifest>
