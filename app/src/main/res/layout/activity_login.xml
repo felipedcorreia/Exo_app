@@ -20,18 +20,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:textColorHint="#cccccc">
+        android:textColorHint="#FFFFFF"
+        android:textColor="#1976d2"
+         >
 
 
         <EditText
             android:id="@+id/edt_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#ffff"
+            android:backgroundTint="#FFFFFF"
             android:drawableLeft="@mipmap/user"
-            android:hint="   Username"
-            android:inputType="textPersonName"
-            android:textColor="#cccccc"
+            android:hint="   E-mail"
+            android:inputType="textEmailAddress"
+            android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"/>
@@ -43,18 +45,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:textColorHint="#cccccc">
+        android:textColorHint="#FFFFFF"
+        >
 
     <EditText
         android:id="@+id/edt_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#ffff"
+        android:backgroundTint="#FFFFFF"
         android:drawableLeft="@mipmap/lock"
         android:ems="10"
         android:hint="   Password"
         android:inputType="textPassword"
-        android:textColor="#cccccc"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"/>
@@ -78,7 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="Entrar"
-        android:background="#FF1493"
+        android:background="#1976d2"
         android:textColor="#FFFAFA"
         android:layout_marginTop="20dp"/>
 

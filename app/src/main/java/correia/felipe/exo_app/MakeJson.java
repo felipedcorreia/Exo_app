@@ -43,4 +43,19 @@ public class MakeJson{
         return (jObj.toString());
     }
 
+    public String makeJsonForgotPassword(EditText email) {
+        JSONArray jArray = new JSONArray();
+        JSONObject jObj = new JSONObject();
+
+        try {
+            jObj.put("email", email.getText().toString());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        jArray.put(jObj);
+        return (jObj.toString());
+    }
+
 }

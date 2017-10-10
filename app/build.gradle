@@ -28,6 +28,7 @@ dependencies {
     // Only required if using IMA features
     // Only required if using Chromecast
     compile project(':jwplayer-common-2.7.5+23')
+    compile files('libs/android-smart-image-view-1.0.0.jar')
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.google.android.exoplayer:exoplayer:r2.4.4'
@@ -43,5 +44,4 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.github.nirhart:parallaxscroll:1.0'
     testCompile 'junit:junit:4.12'
-    compile files('libs/android-smart-image-view-1.0.0.jar')
 }

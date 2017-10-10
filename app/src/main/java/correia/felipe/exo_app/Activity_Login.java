@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -115,7 +116,7 @@ public class Activity_Login extends AppCompatActivity {
         txtRegisterLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent register = new Intent(Activity_Login.this, Activity_register.class);
+                Intent register = new Intent(Activity_Login.this, Activity_Plan_Choose.class);
                 startActivity(register);
 
             }
@@ -257,6 +258,7 @@ public class Activity_Login extends AppCompatActivity {
                         }
                     }
                 }.start();
+                // CASO: 401 quando o usuario esta desativado e digitou a senha incorretamente
             }else if(result == 401){
                 new Thread() {
                 public void run() {
@@ -295,6 +297,9 @@ public class Activity_Login extends AppCompatActivity {
                                                 );
                                                 AlertDialog alert12 = builder2.create();
                                                 alert12.show();
+
+                                                Button bqNeutral = alert12.getButton(DialogInterface.BUTTON_NEUTRAL);
+                                                bqNeutral.setTextColor(Color.parseColor("#4169E1"));
                                             }
                                         });
 
@@ -310,6 +315,12 @@ public class Activity_Login extends AppCompatActivity {
 
                                 AlertDialog alert11 = builder1.create();
                                 alert11.show();
+
+                                Button bqNegative = alert11.getButton(DialogInterface.BUTTON_NEGATIVE);
+                                bqNegative.setTextColor(Color.parseColor("#4169E1"));
+
+                                Button bqPositive = alert11.getButton(DialogInterface.BUTTON_POSITIVE);
+                                bqPositive.setTextColor(Color.parseColor("#4169E1"));
                             }
                         });
 
@@ -325,6 +336,7 @@ public class Activity_Login extends AppCompatActivity {
 
 
                 Toast.makeText(Activity_Login.this, "Status Code: "+result, Toast.LENGTH_SHORT).show();
+            //CASO 404: Erro de Usuario ou senha;
             }else if(result == 404){
                 new Thread() {
                     public void run() {
@@ -357,6 +369,9 @@ public class Activity_Login extends AppCompatActivity {
 
                                     AlertDialog alert11 = builder1.create();
                                     alert11.show();
+
+                                    Button bqNeutral = alert11.getButton(DialogInterface.BUTTON_NEUTRAL);
+                                    bqNeutral.setTextColor(Color.parseColor("#4169E1"));
                                 }
                             });
 
@@ -372,6 +387,7 @@ public class Activity_Login extends AppCompatActivity {
 
 
                 Toast.makeText(Activity_Login.this, "Status Code: "+result, Toast.LENGTH_SHORT).show();
+            //CASO 403: Usuario desativado;
             }else if(result == 403){
                 new Thread() {
                     public void run() {
@@ -415,6 +431,13 @@ public class Activity_Login extends AppCompatActivity {
 
                                     AlertDialog alert11 = builder1.create();
                                     alert11.show();
+
+                                    Button bqNegative = alert11.getButton(DialogInterface.BUTTON_NEGATIVE);
+                                    bqNegative.setTextColor(Color.parseColor("#4169E1"));
+
+                                    Button bqPositive = alert11.getButton(DialogInterface.BUTTON_POSITIVE);
+                                    bqPositive.setTextColor(Color.parseColor("#4169E1"));
+
                                 }
                             });
 

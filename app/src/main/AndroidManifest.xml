@@ -18,17 +18,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity_register"></activity>
+        <activity android:name=".Activity_register" />
 
         <meta-data
             android:name="JW_LICENSE_KEY"
             android:value="SvU3mhaLGcO7eiqq/+IgvqH2EraMgSNPLwpo5A==" />
 
         <activity android:name=".Activity_Principal" />
-        <activity android:name=".DetailsActivity"/>
-        <activity android:name=".Activity_Video"/>
-        <activity android:name=".Details_Activity_Serie"/>
-        <activity android:name=".Activity_Forgot_Password"/>
+        <activity android:name=".DetailsActivity" />
+        <activity android:name=".Activity_Video" />
+        <activity android:name=".Details_Activity_Serie" />
+        <activity android:name=".Activity_Forgot_Password" />
+        <activity
+            android:name=".Activity_Plan_Choose"
+            android:label="@string/title_activity__plan__choose"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
