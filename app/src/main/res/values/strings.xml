@@ -13,6 +13,7 @@
     <string name="lbl_Confirm_Password">Confirme sua Senha</string>
     <string name="lbl_Plan">Escolha seu plano</string>
     <string name="lbl_Church">Igreja</string>
+    <string name="lbl_ZipCode">CEP</string>
 
     <string name="lbl_Lancamento">Carregando...</string>
     <string name="lbl_Destaque">Destaque</string>
