@@ -64,7 +64,6 @@ public class Activity_Plan_Choose extends AppCompatActivity {
             }
         });
 
-
         btn_price_2.setOnClickListener(new View.OnClickListener() {
             String id = "2";
             @Override

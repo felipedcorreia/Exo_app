@@ -36,6 +36,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Felipe on 04/08/2017.
@@ -58,7 +59,8 @@ public class Activity_Register extends AppCompatActivity {
     private EditText edtConfirmPassword;
     private EditText edtZipCode;
 
-    private String FEED_URL = "http://blessp.azurewebsites.net/api/signup";
+    //private String FEED_URL = "http://blessp.azurewebsites.net/api/signup";
+    private String FEED_URL = "http://192.168.0.14:8000/api/signup";
     private String FEED_URL_CHURCH = "http://blessp.azurewebsites.net/api/churches";
 
     private Button btnRegister;
@@ -79,6 +81,7 @@ public class Activity_Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
 
         edtName = (EditText) findViewById(R.id.edtName);
         edtCPF = (EditText) findViewById(R.id.edtCPF);
@@ -115,7 +118,7 @@ public class Activity_Register extends AppCompatActivity {
 
 
         //setAdapters
-        spnPlanType.setAdapter(adpPlanType);
+        //spnPlanType.setAdapter(adpPlanType);
         spnChurchType.setAdapter(adpChurchType);
         spnPhoneType.setAdapter(adpPhoneType);
         spnStateType.setAdapter(adpStateType);
@@ -219,7 +222,7 @@ public class Activity_Register extends AppCompatActivity {
 
                     if(verifyName(edtName) == true &&
                             verifyCPF(edtCPF) == true &&
-                            verifyBirth(edtBirth) == true &&
+
                             verifyDDD(edtDDD) == true &&
                             verifyPhone(edtPhone) == true &&
                             verifyEmail(edtEmail) == true &&
@@ -257,11 +260,13 @@ public class Activity_Register extends AppCompatActivity {
                            EditText ddd, EditText phone, EditText email,
                            EditText street, EditText number, EditText complement,
                            EditText nei, EditText city, EditText zipCode, Spinner state, Spinner church,
-                           EditText password, EditText confirmPassword) {
+                           EditText password, EditText confirmPassword, String plan_id) {
         JSONArray jArray = new JSONArray();
         JSONObject jObj = new JSONObject();
 
         try {
+
+
             jObj.put("name", name.getText().toString());
             jObj.put("email", email.getText().toString());
             jObj.put("password", password.getText().toString());
@@ -278,14 +283,9 @@ public class Activity_Register extends AppCompatActivity {
             jObj.put("city", city.getText().toString());
             jObj.put("state", state.getSelectedItem().toString());
             jObj.put("country", complement.getText().toString());
-            //jObj.put("plan_id", id.getText().toString());
+            jObj.put("plan_id", plan_id);
 
-
-
-
-
-
-
+            Log.d("Register", "JSON " + jObj);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -297,11 +297,11 @@ public class Activity_Register extends AppCompatActivity {
 
     private class AsyncRegister extends AsyncTask<String, String, Integer> {
         ProgressDialog pdLoading = new ProgressDialog(Activity_Register.this);
-
+        final String plan_id = getIntent().getStringExtra("id");
 
 
         String makeJson = makeJson(edtName, edtCPF, edtBirth, edtDDD, edtPhone, edtEmail, edtAdressStreet, edtAdressNumber,
-                edtAdressComplement, edtAdressNeighborhood, edtAdressCity, edtZipCode, spnStateType, spnChurchType, edtPassword, edtConfirmPassword);
+                edtAdressComplement, edtAdressNeighborhood, edtAdressCity, edtZipCode, spnStateType, spnChurchType, edtPassword, edtConfirmPassword, plan_id);
 
         @Override
         protected void onPreExecute(){
@@ -427,7 +427,7 @@ public class Activity_Register extends AppCompatActivity {
 
     private boolean verifyBirth(EditText birth) {
         boolean verify;
-        if (birth.getText().length() <8) {
+        if (birth.getText().length() <10) {
             Toast.makeText(getApplicationContext(), R.string.message_error_empty_birth,
                     Toast.LENGTH_LONG).show();
         verify = false;
@@ -642,12 +642,19 @@ public class Activity_Register extends AppCompatActivity {
                     Log.d("Parser", "JSON id: " + church_id);
                     final String church_name = jsonO.getString("name");
                     Log.d("Parser", "JSON name: " + church_name);
+                ChurchItem church = new ChurchItem();
+                final List<ChurchItem> foo = new ArrayList<church>();
+                church.setName(church_name);
+                church.setId(church_id);
+
+                foo.add(church);
+
                     Handler mHandler = new Handler(Looper.getMainLooper());
                     mHandler.post(new Runnable() {
                         @Override
                         public void run() {
                             Log.d("Parser thread", "THREAD");
-                            adpChurchType.add(church_name);
+                            adpChurchType.add(foo.);
                         }
                     });
             }
